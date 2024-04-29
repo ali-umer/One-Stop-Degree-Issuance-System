@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="studentHome.aspx.cs" Inherits="DesignLayer_Student_studentHome" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="adminHome.aspx.cs" Inherits="DesignLayer_Admin_adminHome" %>
 
 <!DOCTYPE html>
 
@@ -57,7 +57,7 @@
                 text-decoration: none;
                 border-radius: 10px;
                 padding: 5% 0;
-                margin-top: 12%;
+                margin-top: 13%;
                 font-size: x-large;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 position: relative;
@@ -114,12 +114,11 @@
     <div class="left">
         <div class="navbar">
             <img src="../../logo.png">
-            <a style="color: black;" href="/DesignLayer/Student/studentHome.aspx">Home</a>
-            <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
-            <a href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
-            <a href="#">Track Activity</a>
-            <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
-            <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
+            <a style="color: black;" href="/DesignLayer/Admin/adminHome.aspx">Home</a>
+            <a href="/DesignLayer/Admin/adminRequestLog.aspx">Request Log</a>
+            <a href="/DesignLayer/Admin/adminIssueDegree.aspx">Issue Degree</a>
+            <a href="/DesignLayer/Admin/adminUpdateStudentData.aspx">Update Student Data</a>
+            <a href="/DesignLayer/Admin/adminComplaintLog.aspx">Complaint Log</a>
         </div>
     </div>
 
@@ -138,8 +137,8 @@
 
                     <br />
 
-                    <p runat="server" id="fatherName"></p>
-                    <p runat="server" id="batch"></p>
+                    <p runat="server" id="bloodGroup"></p>
+                    <p runat="server" id="gender"></p>
                     <p runat="server" id="nationality"></p>
                     <p runat="server" id="contact"></p>
                 </div>
@@ -151,3 +150,4 @@
 
 </body>
 </html>
+

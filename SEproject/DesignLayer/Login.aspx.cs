@@ -20,7 +20,8 @@ public partial class Login : System.Web.UI.Page
         string passWord = password.Value;
 
         Session["userName"] = userName;
-        Server.Transfer("Student/studentHome.aspx");
+        //Server.Transfer("Student/studentHome.aspx");
+        Server.Transfer("Admin/adminHome.aspx");
 
 
         /*

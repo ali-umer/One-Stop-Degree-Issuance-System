@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="studentHome.aspx.cs" Inherits="DesignLayer_Student_studentHome" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="adminUpdateStudentData.aspx.cs" Inherits="DesignLayer_Admin_adminUpdateStudentData" %>
 
 <!DOCTYPE html>
 
 <html lang="en">
 <head runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Update Student Data</title>
     <style>
         body,
         html {
@@ -57,7 +57,7 @@
                 text-decoration: none;
                 border-radius: 10px;
                 padding: 5% 0;
-                margin-top: 12%;
+                margin-top: 13%;
                 font-size: x-large;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 position: relative;
@@ -92,7 +92,41 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            overflow: hidden;
         }
+
+        .table-container {
+            width: 100%;
+            height: auto;
+            overflow-y: auto;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #333;
+            text-align: left;
+            padding: 8px;
+            width: 25%;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ddd;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
 
         @keyframes glow {
             0% {
@@ -105,7 +139,7 @@
         }
 
         img {
-            height: 21%;
+            height: 19%;
             width: 70%;
         }
     </style>
@@ -114,40 +148,38 @@
     <div class="left">
         <div class="navbar">
             <img src="../../logo.png">
-            <a style="color: black;" href="/DesignLayer/Student/studentHome.aspx">Home</a>
-            <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
-            <a href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
-            <a href="#">Track Activity</a>
-            <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
-            <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
+            <a href="/DesignLayer/Admin/adminHome.aspx">Home</a>
+            <a href="/DesignLayer/Admin/adminRequestLog.aspx">Request Log</a>
+            <a href="/DesignLayer/Admin/adminIssueDegree.aspx">Issue Degree</a>
+            <a style="color: black;" href="/DesignLayer/Admin/adminUpdateStudentData.aspx">Update Student Data</a>
+            <a href="/DesignLayer/Admin/adminComplaintLog.aspx">Complaint Log</a>
         </div>
     </div>
 
     <div class="right">
         <div class="card-container">
             <div class="card">
-                <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px; text-align: left">
-                    <h1>&nbsp;&nbsp;PERSONAL DETAILS</h1>
-                </div>
-                <div>
-                    <br />
-                    <p runat="server" id="name"></p>
-                    <p runat="server" id="DOB"></p>
-                    <p runat="server" id="CNIC"></p>
-                    <p runat="server" id="campus"></p>
+                <div class="table-container">
+                    <form runat="server">
+                        <asp:Table ID="dataTable" runat="server">
+                            <asp:TableHeaderRow>
+                                <asp:TableHeaderCell>ID</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>Required updation</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>Updated value</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>Option</asp:TableHeaderCell>
 
-                    <br />
 
-                    <p runat="server" id="fatherName"></p>
-                    <p runat="server" id="batch"></p>
-                    <p runat="server" id="nationality"></p>
-                    <p runat="server" id="contact"></p>
+                            </asp:TableHeaderRow>
+                        </asp:Table>
+                    </form>
                 </div>
             </div>
-
         </div>
-
     </div>
+
 
 </body>
 </html>
+
+
+

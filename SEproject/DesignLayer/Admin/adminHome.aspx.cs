@@ -6,14 +6,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class DesignLayer_Student_studentHome : System.Web.UI.Page
+public partial class DesignLayer_Admin_adminHome : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
         string userName = Session["userName"].ToString();
-        string mainQuery = "SELECT NAME,DOB,FATHERNAME,BATCH,CNIC,NATIONALITY,CONTACT,CAMPUS FROM student S JOIN users U ON S.studentID= U.ID WHERE S.studentID = @userName";
+        string mainQuery = "SELECT NAME,DOB,BLOODGROUP,GENDER,CNIC,NATIONALITY,CONTACT,CAMPUS FROM OneStopAdmin A JOIN users U ON A.adminID= U.ID WHERE A.adminID = @userName";
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -30,8 +30,8 @@ public partial class DesignLayer_Student_studentHome : System.Web.UI.Page
                     {
                         name.InnerHtml = "<strong>NAME: </strong>" + reader["NAME"].ToString();
                         DOB.InnerHtml = "<strong>DOB: </strong>" + reader["DOB"].ToString();
-                        fatherName.InnerHtml = "<strong>FATHER NAME: </strong>" + reader["FATHERNAME"].ToString();
-                        batch.InnerHtml = "<strong>BATCH: </strong>" + reader["BATCH"].ToString();
+                        bloodGroup.InnerHtml = "<strong>BLOOD GROUP: </strong>" + reader["BLOODGROUP"].ToString();
+                        gender.InnerHtml = "<strong>GENDER: </strong>" + reader["GENDER"].ToString();
                         CNIC.InnerHtml = "<strong>CNIC: </strong>" + reader["CNIC"].ToString();
                         nationality.InnerHtml = "<strong>NATIONALITY: </strong>" + reader["NATIONALITY"].ToString();
                         contact.InnerHtml = "<strong>CONTACT: </strong>" + reader["CONTACT"].ToString();
@@ -42,5 +42,4 @@ public partial class DesignLayer_Student_studentHome : System.Web.UI.Page
             }
         }
     }
-
 }

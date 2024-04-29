@@ -13,34 +13,17 @@
             height: 100%;
         }
 
-        #video-background {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
-
-        #content {
-            position: relative;
-            z-index: 1;
-        }
-
         .left {
             float: left;
             height: 100%;
-            width: 50%;
+            width: 40%;
             text-align: center;
         }
 
         .right {
             float: right;
             height: 100%;
-            width: 50%;
+            width: 60%;
             text-align: center;
         }
 
@@ -129,17 +112,28 @@
 <body>
     <div style="height: 100%; background-color: black;">
 
-        <div class="card-container">
-            <div class="card">
-                <h1 style="margin-bottom: 80px;">Login</h1>
-                <form class="login-form" runat="server">
-                    <input runat="server" type="text" id="username" placeholder="Username" required />
-                    <input runat="server" type="password" id="password" placeholder="Password" required />
-                    <asp:Button ID="btnLogin" class="loginButton" runat="server" Text="Login" OnClick="loginClicked" />
+        <div class="left">
+            <div style="height:50px">
 
-                </form>
-                <a class="signup-btn" href="#">Sign Up</a>
             </div>
+            <img src="../One Stop Degree Issuance System.png" />
+        </div>
+
+        <div class="right">
+
+            <div class="card-container">
+                <div class="card">
+                    <h1 style="margin-bottom: 80px;">Login</h1>
+                    <form class="login-form" runat="server">
+                        <input runat="server" type="text" id="username" placeholder="Username" required />
+                        <input runat="server" type="password" id="password" placeholder="Password" required />
+                        <asp:Button ID="btnLogin" class="loginButton" runat="server" Text="Login" OnClick="loginClicked" />
+
+                    </form>
+                    <a class="signup-btn" href="#">Sign Up</a>
+                </div>
+            </div>
+
         </div>
     </div>
 
