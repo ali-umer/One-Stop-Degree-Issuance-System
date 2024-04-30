@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.DynamicData;
 
-public partial class DesignLayer_Admin_adminComplaintLog : System.Web.UI.Page
+public partial class DesignLayer_FYP_FYPcomplaintLog : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        string query = "SELECT ID, COMPLAINT FROM COMPLAINTS WHERE DEPARTMENT = 'admin'";
+        string query = "SELECT ID, COMPLAINT FROM COMPLAINTS WHERE DEPARTMENT = 'fyp'";
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {

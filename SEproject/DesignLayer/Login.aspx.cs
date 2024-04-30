@@ -10,7 +10,7 @@ public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-         
+
     }
 
     protected void loginClicked(object sender, EventArgs e)
@@ -19,50 +19,53 @@ public partial class Login : System.Web.UI.Page
         string userName = username.Value;
         string passWord = password.Value;
 
-        Session["userName"] = userName;
-        //Server.Transfer("Student/studentHome.aspx");
-        Server.Transfer("Admin/adminHome.aspx");
+        SqlConnection conn = new SqlConnection("Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;");
+        conn.Open();
+
+        Session["username"] = userName;
+        string loginQuery = "select * from users where ID = @username AND password = @password";
+        string roleQuery = "select role from users where ID = @username";
+        string role = "";
+
+        SqlCommand roleCommand = new SqlCommand(roleQuery, conn); ;
+        roleCommand.Parameters.AddWithValue("@username", userName);
+        role = roleCommand.ExecuteScalar().ToString();
+        roleCommand.Dispose();
+
+        SqlCommand loginCommand;
+        loginCommand = new SqlCommand(loginQuery, conn);
+        loginCommand.Parameters.AddWithValue("@username", userName);
+        loginCommand.Parameters.AddWithValue("@password", passWord);
+        SqlDataReader res1 = loginCommand.ExecuteReader();
+        if (!res1.HasRows)
+        {
+            //MessageBox.Show("          USERNAME OR PASSWORD DON'T MATCH          ");
+        }
+
+        else
+        {
+            Session["userName"] = userName;
+
+            if (role == "Student")
+                Server.Transfer("/DesignLayer/Student/studentHome.aspx");
+
+            else if (role == "Admin")
+                Server.Transfer("/DesignLayer/Admin/adminHome.aspx");
+
+            else if (role == "Director")
+                Server.Transfer("/DesignLayer/Director/directorHome.aspx");
+
+            else if (role == "FYP")
+                Server.Transfer("/DesignLayer/FYP/FYPhome.aspx");
 
 
-        /*
-                SqlConnection conn = new SqlConnection("Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;");
-                conn.Open();
+            else if (role == "Finance")
+                Server.Transfer("/DesignLayer/Finance/financeHome.aspx");
 
-                Session["username"] = userName;
-                string loginQuery = "select * from users where ID = @username AND password = @password";
-                string roleQuery = "select role from users where ID = @username";
-                string role = "";
+            loginCommand.Dispose();
+            res1.Close();
 
-                SqlCommand roleCommand = new SqlCommand(roleQuery, conn); ;
-                roleCommand.Parameters.AddWithValue("@username", userName);
-                role = roleCommand.ExecuteScalar().ToString();
-                roleCommand.Dispose();
-
-                SqlCommand loginCommand;
-                loginCommand = new SqlCommand(loginQuery, conn);
-                loginCommand.Parameters.AddWithValue("@username", userName);
-                loginCommand.Parameters.AddWithValue("@password", passWord);
-                SqlDataReader res1 = loginCommand.ExecuteReader();
-                if (!res1.HasRows)
-                {
-                    //MessageBox.Show("          USERNAME OR PASSWORD DON'T MATCH          ");
-                }
-
-                else
-                {
-                    Session["userName"] = userName;
-
-                    if (role == "student")
-                        Server.Transfer("studentHome.aspx");
-                     else if (role == "faculty")
-                         Server.Transfer("FHome.aspx");
-                     else if (role == "admin")
-                         Server.Transfer("AHome.aspx");
-
-                    loginCommand.Dispose();
-                    res1.Close();
-
-                }*/
+        }
 
     }
 }

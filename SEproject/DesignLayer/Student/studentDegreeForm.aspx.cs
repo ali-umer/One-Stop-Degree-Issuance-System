@@ -42,7 +42,7 @@ public partial class DesignLayer_Student_studentDegreeForm : System.Web.UI.Page
     {
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        string insertQuery = "INSERT INTO degreeRequests(ID,name,batch) VALUES (@userName,@name,@batch)";
+        string insertQuery = "INSERT INTO degreeRequests(ID,name,batch,FYPapproval,financeApproval,finalStatus,outstandingDues,degreeFee) VALUES (@userName,@name,@batch,'pending','pending','pending','none','paid')";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();

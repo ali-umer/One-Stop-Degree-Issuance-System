@@ -75,7 +75,7 @@
 
         .card {
             width: 480px;
-            height: 350px;
+            height: 400px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
             justify-content: center;
@@ -119,6 +119,24 @@
                 height: 60px;
             }
 
+            .form-container select {
+                width: 100%;
+                padding: 15px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+                background-color: rgba(255, 255, 255, 0.8);
+                transition: background-color 0.3s ease;
+            }
+
+                .form-container select:focus,
+                .form-container input[type="text"]:focus {
+                    background-color: #fff;
+                    outline: none;
+                    border-color: #007bff;
+                }
+
         .submitButton {
             width: 100%;
             padding: 15px;
@@ -157,6 +175,13 @@
                 </div>
                 <div class="form-container">
                     <form runat="server">
+                        <asp:DropDownList runat="server" ID="department" required="True">
+                            <asp:ListItem Value="" Disabled="True" Selected="True">Select Department</asp:ListItem>
+                            <asp:ListItem Value="admin">One Stop Admin</asp:ListItem>
+                            <asp:ListItem Value="fyp">FYP Department</asp:ListItem>
+                            <asp:ListItem Value="finance">Finance Department</asp:ListItem>
+
+                        </asp:DropDownList>
                         <input runat="server" type="text" id="complaint" placeholder="Enter your complaint here" required>
                         <asp:Button class="submitButton" runat="server" Text="Submit" OnClick="SubmitClicked" ID="submit"></asp:Button>
                     </form>

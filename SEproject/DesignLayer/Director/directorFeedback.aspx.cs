@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.DynamicData;
 
-public partial class DesignLayer_Admin_adminComplaintLog : System.Web.UI.Page
+public partial class DesignLayer_Director_directorFeedback : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        string query = "SELECT ID, COMPLAINT FROM COMPLAINTS WHERE DEPARTMENT = 'admin'";
+        string query = "SELECT ID, FEEDBACK FROM FEEDBACK";
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -26,7 +23,7 @@ public partial class DesignLayer_Admin_adminComplaintLog : System.Web.UI.Page
             while (reader.Read())
             {
                 string id = reader["ID"].ToString();
-                string complaint = reader["COMPLAINT"].ToString();
+                string feedback = reader["FEEDBACK"].ToString();
 
                 // Creating a new table row
                 TableRow row = new TableRow();
@@ -36,9 +33,9 @@ public partial class DesignLayer_Admin_adminComplaintLog : System.Web.UI.Page
                 cellId.Text = id;
                 row.Cells.Add(cellId);
 
-                TableCell cellComplaint = new TableCell();
-                cellComplaint.Text = complaint;
-                row.Cells.Add(cellComplaint);
+                TableCell cellFeedback = new TableCell();
+                cellFeedback.Text = feedback;
+                row.Cells.Add(cellFeedback);
 
                 // Add the row to the table
                 dataTable.Rows.Add(row);

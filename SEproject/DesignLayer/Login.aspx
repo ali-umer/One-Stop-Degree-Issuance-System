@@ -2,10 +2,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
 <head runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ali Umer</title>
+    <title>Login</title>
     <style>
         body,
         html {
@@ -125,8 +125,8 @@
                 <div class="card">
                     <h1 style="margin-bottom: 80px;">Login</h1>
                     <form class="login-form" runat="server">
-                        <input runat="server" type="text" id="username" placeholder="Username" required />
-                        <input runat="server" type="password" id="password" placeholder="Password" required />
+                        <input runat="server" type="text" id="username" placeholder="Username" required="required" autocomplete="off"/>
+                        <input runat="server" type="password" id="password" placeholder="Password" required="required" autocomplete="off"/>
                         <asp:Button ID="btnLogin" class="loginButton" runat="server" Text="Login" OnClick="loginClicked" />
 
                     </form>

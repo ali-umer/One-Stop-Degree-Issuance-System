@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.DynamicData;
 
-public partial class DesignLayer_Admin_adminComplaintLog : System.Web.UI.Page
+public partial class DesignLayer_Director_directorComplaints : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        string query = "SELECT ID, COMPLAINT FROM COMPLAINTS WHERE DEPARTMENT = 'admin'";
+        string query = "SELECT ID, DEPARTMENT, COMPLAINT FROM COMPLAINTS";
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -27,6 +24,7 @@ public partial class DesignLayer_Admin_adminComplaintLog : System.Web.UI.Page
             {
                 string id = reader["ID"].ToString();
                 string complaint = reader["COMPLAINT"].ToString();
+                string department = reader["DEPARTMENT"].ToString();
 
                 // Creating a new table row
                 TableRow row = new TableRow();
@@ -35,6 +33,11 @@ public partial class DesignLayer_Admin_adminComplaintLog : System.Web.UI.Page
                 TableCell cellId = new TableCell();
                 cellId.Text = id;
                 row.Cells.Add(cellId);
+
+                TableCell cellDepartment = new TableCell();
+                cellDepartment.Text = department;
+                row.Cells.Add(cellDepartment);
+
 
                 TableCell cellComplaint = new TableCell();
                 cellComplaint.Text = complaint;
