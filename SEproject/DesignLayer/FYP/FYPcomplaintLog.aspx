@@ -111,7 +111,7 @@
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
-            width: 50%;
+            width: 25%;
         }
 
         th {
@@ -160,12 +160,17 @@
         <div class="card-container">
             <div class="card">
                 <div class="table-container">
-                    <asp:Table ID="dataTable" runat="server">
-                        <asp:TableHeaderRow>
-                            <asp:TableHeaderCell>ID</asp:TableHeaderCell>
-                            <asp:TableHeaderCell>Complaint</asp:TableHeaderCell>
-                        </asp:TableHeaderRow>
-                    </asp:Table>
+                    <form runat="server">
+                        <asp:Table ID="dataTable" runat="server">
+                            <asp:TableHeaderRow>
+                                <asp:TableHeaderCell>ID</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>Complaint</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>Status</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>Action</asp:TableHeaderCell>
+
+                            </asp:TableHeaderRow>
+                        </asp:Table>
+                    </form>
                 </div>
             </div>
         </div>

@@ -10,11 +10,13 @@ public class ComplaintForm
     private string ID;
     private string department;
     private string complaint;
+    private string status;
     public ComplaintForm()
     {
         this.ID = null;
         this.department = null;
         this.complaint = null;
+        this.status = null;
     }
 
     public void setID(string ID)
@@ -43,6 +45,16 @@ public class ComplaintForm
     public string getComplaint()
     {
         return this.complaint;
+    }
+
+    public void setStatus(string status)
+    {
+        this.status = status;
+    }
+
+    public string getStatus()
+    {
+        return this.status;
     }
 
 }

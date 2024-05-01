@@ -51,7 +51,7 @@
                 text-decoration: none;
                 border-radius: 10px;
                 padding: 5% 0;
-                margin-top: 13%;
+                margin-top: 7%;
                 font-size: x-large;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 position: relative;
@@ -67,14 +67,14 @@
                 }
 
         .card-container {
-            display: grid;
+            display: flex;
             justify-content: center;
             align-items: center;
             height: 100%;
         }
 
         .card {
-            width: 480px;
+            width: 420px;
             height: 400px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
@@ -84,6 +84,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            margin: 30px;
         }
 
         @keyframes glow {
@@ -97,7 +98,7 @@
         }
 
         img {
-            height: 19%;
+            height: 21%;
             width: 70%;
         }
 
@@ -151,6 +152,39 @@
             .submitButton:hover {
                 background-color: #000;
             }
+
+
+        .table-container {
+            width: 100%;
+            height: auto;
+            overflow-y: auto;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            width: 33%;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ddd;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 
@@ -158,12 +192,13 @@
     <div class="left">
         <div class="navbar">
             <img src="../../logo.png">
-            <a href="studentHome.aspx">Home</a>
-            <a href="studentDegreeForm.aspx">Degree Form</a>
-            <a style="color: black;" href="studentComplaintForm.aspx">Complaint Form</a>
+            <a href="/DesignLayer/Student/studentHome.aspx">Home</a>
+            <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
+            <a style="color: black;" href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
+            <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
             <a href="#">Track Activity</a>
-            <a href="studentDataChangeForm.aspx">Data Change Form</a>
-            <a href="studentFeedbackForm.aspx">Feedback</a>
+            <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
+            <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>
     </div>
 
@@ -182,7 +217,7 @@
                             <asp:ListItem Value="finance">Finance Department</asp:ListItem>
 
                         </asp:DropDownList>
-                        <input runat="server" type="text" id="complaint" placeholder="Enter your complaint here" required>
+                        <input runat="server" type="text" id="complaint" placeholder="Enter your complaint here" required autocomplete="off">
                         <asp:Button class="submitButton" runat="server" Text="Submit" OnClick="SubmitClicked" ID="submit"></asp:Button>
                     </form>
                 </div>

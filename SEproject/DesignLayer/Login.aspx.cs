@@ -39,9 +39,7 @@ public partial class Login : System.Web.UI.Page
         SqlDataReader res1 = loginCommand.ExecuteReader();
         if (!res1.HasRows)
         {
-            //MessageBox.Show("          USERNAME OR PASSWORD DON'T MATCH          ");
-            Response.Write("<script>alert('WRONG CREDENTIALS')</script>");
-
+            MessageBox.Show("          USERNAME OR PASSWORD DON'T MATCH          ");
         }
 
         else

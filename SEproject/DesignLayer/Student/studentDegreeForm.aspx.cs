@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 
@@ -15,7 +16,7 @@ public partial class DesignLayer_Student_studentDegreeForm : System.Web.UI.Page
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
         string userName = Session["userName"].ToString();
-        string mainQuery = "SELECT ID,NAME FROM student S JOIN users U ON S.studentID= U.ID WHERE S.studentID = @userName";
+        string mainQuery = "SELECT ID,NAME,BATCH FROM student S JOIN users U ON S.studentID= U.ID WHERE S.studentID = @userName";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
@@ -31,6 +32,7 @@ public partial class DesignLayer_Student_studentDegreeForm : System.Web.UI.Page
                     {
                         name.Value = reader["NAME"].ToString();
                         roll.Value = reader["ID"].ToString();
+                        batch.Value = reader["BATCH"].ToString();
                     }
                 }
             }
@@ -42,10 +44,25 @@ public partial class DesignLayer_Student_studentDegreeForm : System.Web.UI.Page
     {
 
         DegreeForm form = new DegreeForm();
-        form.SetID(roll.Value);
-        form.SetName(name.Value);
-        form.SetBatch(batch.Value);
+        string batchValue = batch.Value;
 
-        DatabaseFactory.getInstance().InitiateDegreeRequest(form);
+        int batchInt;
+        if (int.TryParse(batchValue, out batchInt))
+        {
+            if (batchInt >= 2021)
+            {
+                form.SetID(roll.Value);
+                form.SetName(name.Value);
+                form.SetBatch(batch.Value);
+
+                DatabaseFactory.getInstance().InitiateDegreeRequest(form);
+
+            }
+            else
+            {
+                MessageBox.Show("          NOT ELIGIBLE TO APPLY          ");
+
+            }
+        }
     }
 }

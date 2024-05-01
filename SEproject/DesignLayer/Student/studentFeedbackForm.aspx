@@ -51,7 +51,7 @@
                 text-decoration: none;
                 border-radius: 10px;
                 padding: 5% 0;
-                margin-top: 13%;
+                margin-top: 7%;
                 font-size: x-large;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 position: relative;
@@ -97,7 +97,7 @@
         }
 
         img {
-            height: 19%;
+            height: 21%;
             width: 70%;
         }
 
@@ -132,12 +132,13 @@
     <div class="left">
         <div class="navbar">
             <img src="../../logo.png">
-            <a href="studentHome.aspx">Home</a>
-            <a href="studentDegreeForm.aspx">Degree Form</a>
-            <a href="studentComplaintForm.aspx">Complaint Form</a>
+            <a href="/DesignLayer/Student/studentHome.aspx">Home</a>
+            <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
+            <a href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
+            <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
             <a href="#">Track Activity</a>
-            <a href="studentDataChangeForm.aspx">Data Change Form</a>
-            <a style="color: black;" href="studentFeedbackForm.aspx">Feedback</a>
+            <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
+            <a style="color: black;" href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>
     </div>
 
@@ -151,7 +152,7 @@
                     <br />
                     <br />
                     <br />
-                    <input runat="server" type="text" id="feedback" placeholder="Enter your Feedback here" required>
+                    <input runat="server" type="text" id="feedback" placeholder="Enter your Feedback here" required autocomplete ="off">
                     <asp:Button class="submitButton" runat="server" Text="Submit" OnClick="SubmitClicked" ID="submit"></asp:Button>
 
                 </form>

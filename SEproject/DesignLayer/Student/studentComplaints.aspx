@@ -1,11 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="studentDataChangeForm.aspx.cs" Inherits="DesignLayer_Student_studentDataChangeForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="studentComplaints.aspx.cs" Inherits="DesignLayer_Student_studentComplaints" %>
 
 <!DOCTYPE html>
 
 <html lang="en">
 <head runat="server">
-    <title>Data change form</title>
+    <title>Complaint form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
         body,
         html {
@@ -58,6 +59,7 @@
                 transition: all 0.3s ease-in-out;
             }
 
+
                 .navbar a:hover {
                     transform: translateY(-10px);
                     background-color: rgba(128, 128, 128, 0.5);
@@ -65,14 +67,14 @@
                 }
 
         .card-container {
-            display: grid;
+            display: flex;
             justify-content: center;
             align-items: center;
             height: 100%;
         }
 
         .card {
-            width: 480px;
+            width: 600px;
             height: 400px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
@@ -82,6 +84,17 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            margin: 30px;
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px #333;
+            }
+
+            100% {
+                box-shadow: 0 0 30px #000;
+            }
         }
 
         img {
@@ -96,9 +109,6 @@
             border-radius: 10px;
         }
 
-            .form-container h1 {
-                margin-bottom: 20px;
-            }
 
             .form-container input[type="text"] {
                 width: 92%;
@@ -107,8 +117,7 @@
                 border: 1px solid #ccc;
                 border-radius: 5px;
                 font-size: 16px;
-                background-color: rgba(255, 255, 255, 0.8);
-                transition: background-color 0.3s ease;
+                height: 60px;
             }
 
             .form-container select {
@@ -143,8 +152,43 @@
             .submitButton:hover {
                 background-color: #000;
             }
+
+
+
+        .table-container {
+            width: 100%;
+            height: auto;
+            overflow-y: auto;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            width: 33%;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ddd;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
+
 <body>
     <div class="left">
         <div class="navbar">
@@ -152,9 +196,9 @@
             <a href="/DesignLayer/Student/studentHome.aspx">Home</a>
             <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
             <a href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
-            <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
+            <a style="color: black;" href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
             <a href="#">Track Activity</a>
-            <a style="color: black;" href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
+            <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
             <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>
     </div>
@@ -163,25 +207,20 @@
         <div class="card-container">
             <div class="card">
                 <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                    <h1>&nbsp;&nbsp;DATA CHANGE FORM</h1>
+                    <h1>&nbsp;&nbsp;MY COMPLAINTS</h1>
                 </div>
-                <div class="form-container">
-                    <form runat="server">
-                        <asp:DropDownList runat="server" ID="category" required="True">
-                            <asp:ListItem Value="" Disabled="True" Selected="True">Select Category</asp:ListItem>
-                            <asp:ListItem Value="name">Name</asp:ListItem>
-                            <asp:ListItem Value="batch">Batch</asp:ListItem>
-                            <asp:ListItem Value="fatherName">Father's Name</asp:ListItem>
-
-                        </asp:DropDownList>
-                        <input runat="server" type="text" id="value" placeholder="Updated value" required autocomplete="off">
-                        <asp:Button class="submitButton" runat="server" Text="Submit" OnClick="submitClicked"></asp:Button>
-
-                    </form>
+                <div class="table-container">
+                    <asp:Table ID="dataTable" runat="server">
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell>Complaint</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Department</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Status</asp:TableHeaderCell>
+                        </asp:TableHeaderRow>
+                    </asp:Table>
                 </div>
+
             </div>
         </div>
     </div>
 </body>
 </html>
-

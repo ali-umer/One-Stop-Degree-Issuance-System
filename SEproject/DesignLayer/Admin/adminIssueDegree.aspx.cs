@@ -12,7 +12,7 @@ public partial class DesignLayer_Admin_adminIssueDegree : System.Web.UI.Page
     {
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        string query = "SELECT ID, NAME, BATCH, FYPapproval, financeApproval FROM degreeRequests where tokenID is not NULL";
+        string query = "SELECT ID, NAME, BATCH, FYPapproval, financeApproval,FinalStatus FROM degreeRequests where tokenID is not NULL";
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -27,6 +27,7 @@ public partial class DesignLayer_Admin_adminIssueDegree : System.Web.UI.Page
                 string batch = reader["BATCH"].ToString();
                 string fyp = reader["FYPapproval"].ToString();
                 string finance = reader["financeApproval"].ToString();
+                string final = reader["finalStatus"].ToString();
 
                 // Creating a new table row
                 TableRow row = new TableRow();
@@ -51,6 +52,10 @@ public partial class DesignLayer_Admin_adminIssueDegree : System.Web.UI.Page
                 TableCell cellFinance = new TableCell();
                 cellFinance.Text = finance;
                 row.Cells.Add(cellFinance);
+
+                TableCell cellFinal = new TableCell();
+                cellFinal.Text = final;
+                row.Cells.Add(cellFinal);
 
                 //creating button for each row
                 Button generateButton = new Button();

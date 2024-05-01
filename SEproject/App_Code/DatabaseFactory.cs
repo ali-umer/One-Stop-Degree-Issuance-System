@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -222,18 +224,29 @@ public class DatabaseFactory
 
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        string insertQuery = "INSERT INTO complaints VALUES (@userName,@complaint,@department)";
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        string insertQuery = "INSERT INTO complaints VALUES (@userName,@complaint,@department,@status)";
+
+        try
         {
-            connection.Open();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
-            SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
-            insertCommand.Parameters.AddWithValue("@userName", complaintForm.getID());
-            insertCommand.Parameters.AddWithValue("@complaint", complaintForm.getComplaint());
-            insertCommand.Parameters.AddWithValue("@department", complaintForm.getDepartment());
+                SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
+                insertCommand.Parameters.AddWithValue("@userName", complaintForm.getID());
+                insertCommand.Parameters.AddWithValue("@complaint", complaintForm.getComplaint());
+                insertCommand.Parameters.AddWithValue("@department", complaintForm.getDepartment());
+                insertCommand.Parameters.AddWithValue("@status", complaintForm.getStatus());
 
-            insertCommand.ExecuteNonQuery();
+                insertCommand.ExecuteNonQuery();
+                MessageBox.Show("          COMPLAINT RECORDED SUCCESSFULLY          ");
 
+            }
+        }
+
+        catch (SqlException e)
+        {
+            MessageBox.Show("          AN ERROR OCCURRED          ");
         }
     }
 
@@ -243,16 +256,26 @@ public class DatabaseFactory
 
         string insertQuery = "INSERT INTO dataChangeRequest VALUES (@userName,@requestOption,@requestValue)";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        try
         {
-            connection.Open();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
-            SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
-            insertCommand.Parameters.AddWithValue("@userName", dataChangeForm.getID());
-            insertCommand.Parameters.AddWithValue("@requestOption", dataChangeForm.getRequestOption());
-            insertCommand.Parameters.AddWithValue("@requestValue", dataChangeForm.getRequestValue());
+                SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
+                insertCommand.Parameters.AddWithValue("@userName", dataChangeForm.getID());
+                insertCommand.Parameters.AddWithValue("@requestOption", dataChangeForm.getRequestOption());
+                insertCommand.Parameters.AddWithValue("@requestValue", dataChangeForm.getRequestValue());
 
-            insertCommand.ExecuteNonQuery();
+                insertCommand.ExecuteNonQuery();
+                MessageBox.Show("          REQUEST RECORDED SUCCESSFULLY          ");
+
+            }
+        }
+
+        catch (SqlException e)
+        {
+            MessageBox.Show("          AN ERROR OCCURRED          ");
 
         }
     }
@@ -263,15 +286,24 @@ public class DatabaseFactory
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
         string insertQuery = "INSERT INTO degreeRequests(ID,name,batch,FYPapproval,financeApproval,finalStatus,outstandingDues,degreeFee) VALUES (@userName,@name,@batch,'pending','pending','pending','none','paid')";
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
 
-            SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
-            insertCommand.Parameters.AddWithValue("@userName", degreeForm.GetID());
-            insertCommand.Parameters.AddWithValue("@name", degreeForm.GetName());
-            insertCommand.Parameters.AddWithValue("@batch", degreeForm.GetBatch());
-            insertCommand.ExecuteNonQuery();
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
+                insertCommand.Parameters.AddWithValue("@userName", degreeForm.GetID());
+                insertCommand.Parameters.AddWithValue("@name", degreeForm.GetName());
+                insertCommand.Parameters.AddWithValue("@batch", degreeForm.GetBatch());
+                insertCommand.ExecuteNonQuery();
+
+                MessageBox.Show("          DEGREE REQUEST INITIATED SUCCESSFULLY          ");
+            }
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show("          SOMETHING WENT WRONG          ");
 
         }
     }
@@ -286,27 +318,40 @@ public class DatabaseFactory
 
         string insertQuery = "INSERT INTO feedback VALUES (@userName,@feedback)";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        try
         {
-            connection.Open();
-
-            SqlCommand checkCommand = new SqlCommand(checkQuery, connection);
-            checkCommand.Parameters.AddWithValue("@userName", feedbackForm.getID());
-
-            object result = checkCommand.ExecuteScalar();
-
-            if (result != null)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                finalStatus = result.ToString();
-            }
-            if (finalStatus == "approved")
-            {
-                SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
-                insertCommand.Parameters.AddWithValue("@userName", feedbackForm.getID());
-                insertCommand.Parameters.AddWithValue("@feedback", feedbackForm.getFeedback());
-                insertCommand.ExecuteNonQuery();
-            }
+                connection.Open();
 
+                SqlCommand checkCommand = new SqlCommand(checkQuery, connection);
+                checkCommand.Parameters.AddWithValue("@userName", feedbackForm.getID());
+
+                object result = checkCommand.ExecuteScalar();
+
+                if (result != null)
+                {
+                    finalStatus = result.ToString();
+                }
+                if (finalStatus == "approved")
+                {
+                    SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
+                    insertCommand.Parameters.AddWithValue("@userName", feedbackForm.getID());
+                    insertCommand.Parameters.AddWithValue("@feedback", feedbackForm.getFeedback());
+                    insertCommand.ExecuteNonQuery();
+                    MessageBox.Show("          FEEDBACK RECORDED SUCCESSFULLY          ");
+
+                }
+                else
+                {
+                    MessageBox.Show("          SOMETHING WENT WRONG          ");
+
+                }
+            }
+        }
+        catch (SqlException e)
+        {
+            MessageBox.Show("          SOMETHING WENT WRONG          ");
         }
     }
 
@@ -315,18 +360,28 @@ public class DatabaseFactory
     {
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        try
         {
-            connection.Open();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
 
-            string updateQuery = "Update degreeRequests set FYPapproval = 'not approved', FYPTime = @FYPTime,FYPDate = @FYPDate where ID = @id";
+                string updateQuery = "Update degreeRequests set FYPapproval = 'not approved', FYPTime = @FYPTime,FYPDate = @FYPDate where ID = @id";
 
-            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-            updateCommand.Parameters.AddWithValue("FYPTime", form.GetFYPTime());
-            updateCommand.Parameters.AddWithValue("FYPDate", form.GetFYPDate());
-            updateCommand.Parameters.AddWithValue("id", form.GetID());
-            updateCommand.ExecuteNonQuery();
+                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+                updateCommand.Parameters.AddWithValue("FYPTime", form.GetFYPTime());
+                updateCommand.Parameters.AddWithValue("FYPDate", form.GetFYPDate());
+                updateCommand.Parameters.AddWithValue("id", form.GetID());
+                updateCommand.ExecuteNonQuery();
+                MessageBox.Show("          SUCCESSFUL          ");
+
+            }
+        }
+        catch (SqlException e)
+        {
+            MessageBox.Show("          AN ERROR OCCURED          ");
+
         }
     }
 
@@ -334,17 +389,27 @@ public class DatabaseFactory
     {
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        try
         {
-            connection.Open();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
-            string updateQuery = "Update degreeRequests set FYPapproval = 'approved', FYPTime = @FYPTime,FYPdate = @FYPDate where ID = @id";
+                string updateQuery = "Update degreeRequests set FYPapproval = 'approved', FYPTime = @FYPTime,FYPdate = @FYPDate where ID = @id";
 
-            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-            updateCommand.Parameters.AddWithValue("FYPTime", form.GetFYPTime());
-            updateCommand.Parameters.AddWithValue("FYPDate", form.GetFYPDate());
-            updateCommand.Parameters.AddWithValue("id", form.GetID());
-            updateCommand.ExecuteNonQuery();
+                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+                updateCommand.Parameters.AddWithValue("FYPTime", form.GetFYPTime());
+                updateCommand.Parameters.AddWithValue("FYPDate", form.GetFYPDate());
+                updateCommand.Parameters.AddWithValue("id", form.GetID());
+                updateCommand.ExecuteNonQuery();
+                MessageBox.Show("          SUCCESSFUL          ");
+
+            }
+        }
+        catch (SqlException e)
+        {
+            MessageBox.Show("          AN ERROR OCCURRED          ");
+
         }
     }
 
@@ -352,15 +417,25 @@ public class DatabaseFactory
     {
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        try
         {
-            connection.Open();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
-            string updateQuery = "Update degreeRequests set degreeFee = 'not paid' where ID = @id";
+                string updateQuery = "Update degreeRequests set degreeFee = 'not paid' where ID = @id";
 
-            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-            updateCommand.Parameters.AddWithValue("id", form.GetID());
-            updateCommand.ExecuteNonQuery();
+                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+                updateCommand.Parameters.AddWithValue("id", form.GetID());
+                updateCommand.ExecuteNonQuery();
+                MessageBox.Show("          SUCCESSFUL          ");
+
+            }
+        }
+
+        catch (SqlException e)
+        {
+            MessageBox.Show("          AN ERROR OCCURRED          ");
 
         }
     }
@@ -370,15 +445,25 @@ public class DatabaseFactory
 
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        try
         {
-            connection.Open();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
-            string updateQuery = "Update degreeRequests set outstandingDues = 'remaining' where ID = @id";
+                string updateQuery = "Update degreeRequests set outstandingDues = 'remaining' where ID = @id";
 
-            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-            updateCommand.Parameters.AddWithValue("id", form.GetID());
-            updateCommand.ExecuteNonQuery();
+                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+                updateCommand.Parameters.AddWithValue("id", form.GetID());
+                updateCommand.ExecuteNonQuery();
+                MessageBox.Show("          SUCCESSFUL          ");
+
+            }
+        }
+
+        catch (SqlException e)
+        {
+            MessageBox.Show("          AN ERROR OCCURRED          ");
 
         }
     }
@@ -389,33 +474,48 @@ public class DatabaseFactory
 
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        try
         {
-            connection.Open();
-
-            string checkQuery = "SELECT OUTSTANDINGDUES, DEGREEFEE FROM DEGREEREQUESTS WHERE ID = @id";
-
-            SqlCommand checkCommand = new SqlCommand(checkQuery, connection);
-            checkCommand.Parameters.AddWithValue("id", form.GetID());
-            SqlDataReader reader = checkCommand.ExecuteReader();
-
-            while (reader.Read())
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                dues = reader["OUTSTANDINGDUES"].ToString();
-                fee = reader["DEGREEFEE"].ToString();
-            }
-            reader.Close();
+                connection.Open();
 
-            if (dues == "none" && fee == "paid")
-            {
-                string updateQuery = "Update degreeRequests set Financeapproval = 'approved', financeTime = @FinanceTime,financeDate = @financeDate where ID = @id";
+                string checkQuery = "SELECT OUTSTANDINGDUES, DEGREEFEE FROM DEGREEREQUESTS WHERE ID = @id";
 
-                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-                updateCommand.Parameters.AddWithValue("FinanceTime", form.GetFinanceTime());
-                updateCommand.Parameters.AddWithValue("financeDate", form.GetFinanceDate());
-                updateCommand.Parameters.AddWithValue("id", form.GetID());
-                updateCommand.ExecuteNonQuery();
+                SqlCommand checkCommand = new SqlCommand(checkQuery, connection);
+                checkCommand.Parameters.AddWithValue("id", form.GetID());
+                SqlDataReader reader = checkCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    dues = reader["OUTSTANDINGDUES"].ToString();
+                    fee = reader["DEGREEFEE"].ToString();
+                }
+                reader.Close();
+
+                if (dues == "none" && fee == "paid")
+                {
+                    string updateQuery = "Update degreeRequests set Financeapproval = 'approved', financeTime = @FinanceTime,financeDate = @financeDate where ID = @id";
+
+                    SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+                    updateCommand.Parameters.AddWithValue("FinanceTime", form.GetFinanceTime());
+                    updateCommand.Parameters.AddWithValue("financeDate", form.GetFinanceDate());
+                    updateCommand.Parameters.AddWithValue("id", form.GetID());
+                    updateCommand.ExecuteNonQuery();
+                    MessageBox.Show("          SUCCESSFUL          ");
+
+                }
+                else
+                {
+                    MessageBox.Show("          AN ERROR OCCURRED          ");
+
+                }
             }
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show("          AN ERROR OCCURRED          ");
+
         }
     }
 
@@ -426,26 +526,42 @@ public class DatabaseFactory
         string query = "select FYPapproval,FinanceApproval from degreeRequests where ID = @id";
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        try
         {
-            connection.Open();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@id", form.GetID());
-            SqlDataReader reader = command.ExecuteReader();
-            if (reader.Read())
-            {
-                fyp = reader["FYPapproval"].ToString();
-                finance = reader["FinanceApproval"].ToString();
-                reader.Close();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@id", form.GetID());
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    fyp = reader["FYPapproval"].ToString();
+                    finance = reader["FinanceApproval"].ToString();
+                    reader.Close();
+                }
+                if (fyp == "approved" && finance == "approved")
+                {
+                    string updateQuery = "update degreeRequests set finalStatus = 'approved' where ID = @id";
+                    SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+                    updateCommand.Parameters.AddWithValue("@id", form.GetID());
+                    updateCommand.ExecuteNonQuery();
+                    MessageBox.Show("          SUCCESSFUL          ");
+
+                }
+                else
+                {
+                    MessageBox.Show("          AN ERROR OCCURRED          ");
+
+                }
             }
-            if (fyp == "approved" && finance == "approved")
-            {
-                string updateQuery = "update degreeRequests set finalStatus = 'approved' where ID = @id";
-                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-                updateCommand.Parameters.AddWithValue("@id", form.GetID());
-                updateCommand.ExecuteNonQuery();
-            }
+        }
+
+        catch(SqlException ex)
+        {
+            MessageBox.Show("          AN ERROR OCCURRED          ");
+
         }
     }
 
@@ -457,72 +573,92 @@ public class DatabaseFactory
 
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        try
         {
-            connection.Open();
-
-            SqlCommand command = new SqlCommand(query, connection);
-            object result = command.ExecuteScalar();
-            if (result != null && result != DBNull.Value)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                tokenID = Convert.ToInt32(result.ToString());
-            }
-            else
-            {
-                tokenID = 0;
-            }
-            tokenID++;
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(query, connection);
+                object result = command.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    tokenID = Convert.ToInt32(result.ToString());
+                }
+                else
+                {
+                    tokenID = 0;
+                }
+                tokenID++;
 
 
-            string checkQuery = "select tokenID from degreeRequests where ID = @id";
+                string checkQuery = "select tokenID from degreeRequests where ID = @id";
 
-            SqlCommand checkCommand = new SqlCommand(checkQuery, connection);
-            checkCommand.Parameters.AddWithValue("id", form.GetID());
-            object checkToken = checkCommand.ExecuteScalar();
-            if (checkToken != null && checkToken != DBNull.Value)
-            {
-                //print message here that token already generated
+                SqlCommand checkCommand = new SqlCommand(checkQuery, connection);
+                checkCommand.Parameters.AddWithValue("id", form.GetID());
+                object checkToken = checkCommand.ExecuteScalar();
+                if (checkToken != null && checkToken != DBNull.Value)
+                {
+                    MessageBox.Show("          TOKEN ALREADY GENERATED          ");
+                }
+                else
+                {
+                    string updateQuery = "Update degreeRequests set tokenID = @tokenID, tokenTime = @tokenTime,tokenDate = @tokenDate,FYPapproval='pending',financeApproval = 'pending' where ID = @id";
+                    SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+                    updateCommand.Parameters.AddWithValue("tokenID", tokenID);
+                    updateCommand.Parameters.AddWithValue("tokenTime", form.GetTokenTime());
+                    updateCommand.Parameters.AddWithValue("tokenDate", form.GetTokenDate());
+                    updateCommand.Parameters.AddWithValue("id", form.GetID());
+                    updateCommand.ExecuteNonQuery();
+                    MessageBox.Show("          SUCCESSFUL          ");
+
+                }
             }
-            else
-            {
-                string updateQuery = "Update degreeRequests set tokenID = @tokenID, tokenTime = @tokenTime,tokenDate = @tokenDate,FYPapproval='pending',financeApproval = 'pending' where ID = @id";
-                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-                updateCommand.Parameters.AddWithValue("tokenID", tokenID);
-                updateCommand.Parameters.AddWithValue("tokenTime", form.GetTokenTime());
-                updateCommand.Parameters.AddWithValue("tokenDate", form.GetTokenDate());
-                updateCommand.Parameters.AddWithValue("id", form.GetID());
-                updateCommand.ExecuteNonQuery();
-            }
+        }
+
+        catch(SqlException sqlEx)
+        {
+            MessageBox.Show("          AN ERROR OCCURRED          ");
+
         }
     }
 
     public void DataChangeAccepted(DataChangeForm form)
     {
-        
+
         string query = null;
 
         string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        if (form.getRequestOption() =="name")
+        if (form.getRequestOption() == "name")
         {
             query = "Update users set name = @requestValue where ID = @id";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
 
 
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@requestValue", form.getRequestValue());
-                command.Parameters.AddWithValue("@id", form.getID());
-                command.ExecuteNonQuery();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@requestValue", form.getRequestValue());
+                    command.Parameters.AddWithValue("@id", form.getID());
+                    command.ExecuteNonQuery();
 
-                string deleteQuery = "delete from dataChangeRequest where ID=@id and requestOption = @requestOption";
+                    string deleteQuery = "delete from dataChangeRequest where ID=@id and requestOption = @requestOption";
 
-                SqlCommand deletecommand = new SqlCommand(deleteQuery, connection);
-                deletecommand.Parameters.AddWithValue("@id", form.getID());
-                deletecommand.Parameters.AddWithValue("@requestOption", form.getRequestOption());
-                deletecommand.ExecuteNonQuery();
+                    SqlCommand deletecommand = new SqlCommand(deleteQuery, connection);
+                    deletecommand.Parameters.AddWithValue("@id", form.getID());
+                    deletecommand.Parameters.AddWithValue("@requestOption", form.getRequestOption());
+                    deletecommand.ExecuteNonQuery();
+                    MessageBox.Show("          SUCCESSFUL          ");
+
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show("          AN ERROR OCCURRED          ");
 
             }
         }
@@ -530,26 +666,65 @@ public class DatabaseFactory
         {
             query = $"UPDATE student SET {form.getRequestOption()} = @requestValue WHERE studentID = @id";
 
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@requestValue", form.getRequestValue());
+                    command.Parameters.AddWithValue("@id", form.getID());
+                    command.ExecuteNonQuery();
+
+                    string deleteQuery = "DELETE FROM dataChangeRequest WHERE ID = @id AND requestOption = @requestOption";
+
+                    SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
+                    deleteCommand.Parameters.AddWithValue("@id", form.getID());
+                    deleteCommand.Parameters.AddWithValue("@requestOption", form.getRequestOption());
+                    deleteCommand.ExecuteNonQuery();
+                    MessageBox.Show("          SUCCESSFUL          ");
+
+                }
+            }
+
+            catch(SqlException ex)
+            {
+                MessageBox.Show("          AN ERROR OCCURRED          ");
+
+            }
+
+        }
+    }
+
+    public void resolveComplaint(ComplaintForm form)
+    {
+        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
+
+        try
+        {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@requestValue", form.getRequestValue());
-                command.Parameters.AddWithValue("@id", form.getID());
-                command.ExecuteNonQuery();
+                string updateQuery = "Update Complaints set status = 'Solved' where ID = @id AND complaint = @complaint";
 
-                string deleteQuery = "DELETE FROM dataChangeRequest WHERE ID = @id AND requestOption = @requestOption";
+                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+                updateCommand.Parameters.AddWithValue("id", form.getID());
+                updateCommand.Parameters.AddWithValue("complaint", form.getComplaint());
+                updateCommand.ExecuteNonQuery();
+                MessageBox.Show("          SUCCESSFUL          ");
 
-                SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
-                deleteCommand.Parameters.AddWithValue("@id", form.getID());
-                deleteCommand.Parameters.AddWithValue("@requestOption", form.getRequestOption());
-                deleteCommand.ExecuteNonQuery();
+
             }
+        }
+
+        catch(SqlException ex)
+        {
+            MessageBox.Show("          AN ERROR OCCURRED          ");
 
         }
 
-       
     }
 
 }

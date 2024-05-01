@@ -111,7 +111,7 @@
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
-            width: 16.66%;
+            width: 14.5%;
         }
 
         th {
@@ -169,6 +169,7 @@
                                 <asp:TableHeaderCell>Batch</asp:TableHeaderCell>
                                 <asp:TableHeaderCell>FYP status</asp:TableHeaderCell>
                                 <asp:TableHeaderCell>Finance Status</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>Final Status</asp:TableHeaderCell>
                                 <asp:TableHeaderCell>Generate</asp:TableHeaderCell>
 
 

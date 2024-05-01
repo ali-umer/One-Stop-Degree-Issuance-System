@@ -57,7 +57,7 @@
                 text-decoration: none;
                 border-radius: 10px;
                 padding: 5% 0;
-                margin-top: 12%;
+                margin-top: 7%;
                 font-size: x-large;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 position: relative;
@@ -117,6 +117,7 @@
             <a style="color: black;" href="/DesignLayer/Student/studentHome.aspx">Home</a>
             <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
             <a href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
+            <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
             <a href="#">Track Activity</a>
             <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
             <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>

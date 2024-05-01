@@ -22,6 +22,7 @@ public partial class DesignLayer_Student_studentComplaintForm : System.Web.UI.Pa
         complaintForm.setID(Session["userName"].ToString());
         complaintForm.setDepartment(department.SelectedValue);
         complaintForm.setComplaint(complaint.Value);
+        complaintForm.setStatus("Not Solved");
 
         DatabaseFactory.getInstance().insertComplaint(complaintForm);
     }

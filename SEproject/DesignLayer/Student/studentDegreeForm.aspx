@@ -52,7 +52,7 @@
                 text-decoration: none;
                 border-radius: 10px;
                 padding: 5% 0;
-                margin-top: 13%;
+                margin-top: 7%;
                 font-size: x-large;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 position: relative;
@@ -99,7 +99,7 @@
         }
 
         img {
-            height: 19%;
+            height: 21%;
             width: 70%;
         }
 
@@ -146,12 +146,13 @@
     <div class="left">
         <div class="navbar">
             <img src="../../logo.png">
-            <a href="studentHome.aspx">Home</a>
-            <a style="color: black;" href="studentDegreeForm.aspx">Degree Form</a>
+            <a href="/DesignLayer/Student/studentHome.aspx">Home</a>
+            <a style="color: black;" href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
             <a href="studentComplaintForm.aspx">Complaint Form</a>
+            <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
             <a href="#">Track Activity</a>
-            <a href="studentDataChangeForm.aspx">Data Change Form</a>
-            <a href="studentFeedbackForm.aspx">Feedback</a>
+            <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
+            <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>
     </div>
 
@@ -165,7 +166,7 @@
                     <form runat="server">
                         <input runat="server" type="text" id="name" placeholder="Name" required disabled>
                         <input runat="server" type="text" id="roll" placeholder="Roll no" required disabled>
-                        <input runat="server" type="text" id="batch" placeholder="Batch" required>
+                        <input runat="server" type="text" id="batch" placeholder="Batch" required disabled>
                         <asp:Button class="submitButton" runat="server" Text="Initiate Request" OnClick="RequestInitiated"></asp:Button>
 
                     </form>
