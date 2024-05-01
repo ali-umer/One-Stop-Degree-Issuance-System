@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Windows.Forms;
 public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -40,6 +40,8 @@ public partial class Login : System.Web.UI.Page
         if (!res1.HasRows)
         {
             //MessageBox.Show("          USERNAME OR PASSWORD DON'T MATCH          ");
+            Response.Write("<script>alert('WRONG CREDENTIALS')</script>");
+
         }
 
         else

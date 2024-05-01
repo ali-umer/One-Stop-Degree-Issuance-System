@@ -52,9 +52,9 @@ public partial class DesignLayer_FYP_FYPrequestLog : System.Web.UI.Page
                 Button approveButton = new Button();
                 approveButton.Text = "Approve";
                 approveButton.ID = "approveButton_" + id;
-                approveButton.CommandArgument = id; // Store data in CommandArgument
-                approveButton.Click += new EventHandler(approve); // Assign event handler
-                approveButton.Attributes.Add("runat", "server"); // Add runat="server" attribute
+                approveButton.CommandArgument = id;
+                approveButton.Click += new EventHandler(approve);
+                approveButton.Attributes.Add("runat", "server");
                 TableCell cellButton = new TableCell();
                 cellButton.Controls.Add(approveButton);
                 row.Cells.Add(cellButton);
@@ -74,24 +74,17 @@ public partial class DesignLayer_FYP_FYPrequestLog : System.Web.UI.Page
         string[] args = btn.CommandArgument.Split('|');
         string id = args[0];
 
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
+        DateTime currentTime = DateTime.Now;
+        DateTime currentDate = DateTime.Today;
+        string formattedTime = currentTime.ToString("HH:mm:ss");
+        string formattedDate = currentDate.ToString("yyyy-MM-dd");
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
 
-            DateTime currentTime = DateTime.Now;
-            DateTime currentDate = DateTime.Today;
+        DegreeForm form = new DegreeForm();
+        form.SetID(id);
+        form.SetFYPTime(formattedTime);
+        form.SetFYPDate(formattedDate);
+        DatabaseFactory.getInstance().generateEligibleforFYP(form);
 
-            string formattedTime = currentTime.ToString("HH:mm:ss");
-            string formattedDate = currentDate.ToString("yyyy-MM-dd");
-            string updateQuery = "Update degreeRequests set FYPapproval = 'approved', FYPTime = @FYPTime,FYPdate = @FYPDate where ID = @id";
-
-            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-            updateCommand.Parameters.AddWithValue("FYPTime", formattedTime);
-            updateCommand.Parameters.AddWithValue("FYPDate", formattedDate);
-            updateCommand.Parameters.AddWithValue("id", id);
-            updateCommand.ExecuteNonQuery();
-        }
     }
 }

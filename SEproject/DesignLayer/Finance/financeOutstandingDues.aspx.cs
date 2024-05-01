@@ -53,9 +53,10 @@ public partial class DesignLayer_Finance_financeOutstandingDues : System.Web.UI.
                 Button ineligibleButton = new Button();
                 ineligibleButton.Text = "Ineligible";
                 ineligibleButton.ID = "ineligibleButton_" + id;
-                ineligibleButton.CommandArgument = id; // Store data in CommandArgument
-                ineligibleButton.Click += new EventHandler(approve); // Assign event handler
-                ineligibleButton.Attributes.Add("runat", "server"); // Add runat="server" attribute
+                ineligibleButton.CommandArgument = id;
+                ineligibleButton.Click += new EventHandler(disApprove);
+                ineligibleButton.Attributes.Add("runat", "server");
+
                 TableCell cellButton = new TableCell();
                 cellButton.Controls.Add(ineligibleButton);
                 row.Cells.Add(cellButton);
@@ -68,25 +69,16 @@ public partial class DesignLayer_Finance_financeOutstandingDues : System.Web.UI.
         }
     }
 
-    protected void approve(object sender, EventArgs e)
+    protected void disApprove(object sender, EventArgs e)
     {
         Button btn = (Button)sender;
 
         string[] args = btn.CommandArgument.Split('|');
         string id = args[0];
-        string dues = null, fee = null;
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
+        DegreeForm degreeForm = new DegreeForm();
+        degreeForm.SetID(id);
 
-            string updateQuery = "Update degreeRequests set outstandingDues = 'remaining' where ID = @id";
-
-            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-            updateCommand.Parameters.AddWithValue("id", id);
-            updateCommand.ExecuteNonQuery();
-
-        }
+        DatabaseFactory.getInstance().OutstandingDuesRemaining(degreeForm);
     }
 }

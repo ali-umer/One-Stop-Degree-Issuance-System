@@ -71,56 +71,11 @@ public partial class DesignLayer_Admin_adminUpdateStudentData : System.Web.UI.Pa
         string requestOption = args[1];
         string requestValue = args[2];
 
-        string query = null;
+        DataChangeForm form = new DataChangeForm();
+        form.setID(id);
+        form.setRequestOption(requestOption);
+        form.setRequestValue(requestValue);
 
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
-
-        if (requestOption=="name")
-        {
-            query = "Update users set name = @requestValue where ID = @id";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@requestValue", requestValue);
-                command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
-
-                string deleteQuery = "delete from dataChangeRequest where ID=@id and requestOption = @requestOption";
-
-                SqlCommand deletecommand = new SqlCommand(deleteQuery, connection);
-                deletecommand.Parameters.AddWithValue("@id", id);
-                deletecommand.Parameters.AddWithValue("@requestOption", requestOption);
-                deletecommand.ExecuteNonQuery();
-
-            }
-        }
-        else
-        {
-            query = $"UPDATE student SET {requestOption} = @requestValue WHERE studentID = @id";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@requestValue", requestValue);
-                command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
-
-                string deleteQuery = "DELETE FROM dataChangeRequest WHERE ID = @id AND requestOption = @requestOption";
-
-                SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
-                deleteCommand.Parameters.AddWithValue("@id", id);
-                deleteCommand.Parameters.AddWithValue("@requestOption", requestOption);
-                deleteCommand.ExecuteNonQuery();
-            }
-
-        }
-
-       
+        DatabaseFactory.getInstance().DataChangeAccepted(form);
     }
 }

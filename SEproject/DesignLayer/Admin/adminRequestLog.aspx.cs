@@ -70,54 +70,20 @@ public partial class DesignLayer_Admin_adminRequestLog : System.Web.UI.Page
 
         string[] args = btn.CommandArgument.Split('|');
         string id = args[0];
-        int tokenID;
 
-        string query = "select top 1 tokenID from degreeRequests order by tokenID desc";
-      
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            SqlCommand command = new SqlCommand(query, connection);
-            object result = command.ExecuteScalar();
-            if (result != null && result != DBNull.Value)
-            {
-                tokenID = Convert.ToInt32(result.ToString());
-            }
-            else
-            {
-                tokenID = 0;
-            }
-            tokenID++;
-
-            DateTime currentTime = DateTime.Now;
-            string formattedTime = currentTime.ToString("HH:mm:ss");
+        DateTime currentTime = DateTime.Now;
+        DateTime currentDate = DateTime.Today;
+        string formattedTime = currentTime.ToString("HH:mm:ss");
+        string formattedDate = currentDate.ToString("yyyy-MM-dd");
 
 
-            DateTime currentDate = DateTime.Today;
-            string formattedDate = currentDate.ToString("yyyy-MM-dd");
+        DegreeForm form = new DegreeForm();
 
-            string checkQuery = "select tokenID from degreeRequests where ID = @id";
+        form.SetID(id);
+        form.SetTokenTime(formattedTime);
+        form.SetTokenDate(formattedDate);
 
-            SqlCommand checkCommand = new SqlCommand(checkQuery, connection);
-            checkCommand.Parameters.AddWithValue("id", id);
-            object checkToken = checkCommand.ExecuteScalar();
-            if(checkToken!= null && checkToken != DBNull.Value)
-            {
-                //print message here that token already generated
-            }
-            else
-            {
-                string updateQuery = "Update degreeRequests set tokenID = @tokenID, tokenTime = @tokenTime,tokenDate = @tokenDate,FYPapproval='pending',financeApproval = 'pending' where ID = @id";
-                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-                updateCommand.Parameters.AddWithValue("tokenID", tokenID);
-                updateCommand.Parameters.AddWithValue("tokenTime", formattedTime);
-                updateCommand.Parameters.AddWithValue("tokenDate", formattedDate);
-                updateCommand.Parameters.AddWithValue("id", id);
-                updateCommand.ExecuteNonQuery();
-            }
-        }
+        DatabaseFactory.getInstance().generateToken(form);
+
     }
 }

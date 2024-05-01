@@ -10,36 +10,15 @@ public partial class DesignLayer_FYP_FYPhome : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
+        FYP fyp = DatabaseFactory.getInstance().getPersonalDetailsofFYP(Session["userName"].ToString());
 
-        string userName = Session["userName"].ToString();
-        string mainQuery = "SELECT NAME,DOB,BLOODGROUP,GENDER,CNIC,NATIONALITY,CONTACT,CAMPUS FROM FYPdepartment F JOIN users U ON F.departmentID= U.ID WHERE F.departmentID = @userName";
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-
-            using (SqlCommand command = new SqlCommand(mainQuery, connection))
-            {
-                command.Parameters.AddWithValue("@userName", userName);
-
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        name.InnerHtml = "<strong>NAME: </strong>" + reader["NAME"].ToString();
-                        DOB.InnerHtml = "<strong>DOB: </strong>" + reader["DOB"].ToString();
-                        bloodGroup.InnerHtml = "<strong>BLOOD GROUP: </strong>" + reader["BLOODGROUP"].ToString();
-                        gender.InnerHtml = "<strong>GENDER: </strong>" + reader["GENDER"].ToString();
-                        CNIC.InnerHtml = "<strong>CNIC: </strong>" + reader["CNIC"].ToString();
-                        nationality.InnerHtml = "<strong>NATIONALITY: </strong>" + reader["NATIONALITY"].ToString();
-                        contact.InnerHtml = "<strong>CONTACT: </strong>" + reader["CONTACT"].ToString();
-                        campus.InnerHtml = "<strong>CAMPUS: </strong>" + reader["CAMPUS"].ToString();
-
-                    }
-                }
-            }
-        }
+        name.InnerHtml = "<strong>NAME: </strong>" + fyp.getName();
+        DOB.InnerHtml = "<strong>DOB: </strong>" + fyp.getDOB();
+        bloodGroup.InnerHtml = "<strong>BLOOD GROUP: </strong>" + fyp.getBloodGroup();
+        gender.InnerHtml = "<strong>GENDER: </strong>" + fyp.getGender();
+        CNIC.InnerHtml = "<strong>CNIC: </strong>" + fyp.getCNIC();
+        nationality.InnerHtml = "<strong>NATIONALITY: </strong>" + fyp.getCNIC();
+        contact.InnerHtml = "<strong>CONTACT: </strong>" + fyp.getContact();
+        campus.InnerHtml = "<strong>CAMPUS: </strong>" + fyp.getContact();
     }
 }

@@ -78,31 +78,10 @@ public partial class DesignLayer_Admin_adminIssueDegree : System.Web.UI.Page
 
         string[] args = btn.CommandArgument.Split('|');
         string id = args[0];
-        string fyp = null, finance = null;
-        string query = "select FYPapproval,FinanceApproval from degreeRequests where ID = @id";
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@id", id);
-            SqlDataReader reader = command.ExecuteReader();
-            if (reader.Read())
-            {
-                fyp = reader["FYPapproval"].ToString();
-                finance = reader["FinanceApproval"].ToString();
-                reader.Close();
-            }
-            if (fyp == "approved" && finance == "approved")
-            {
-                string updateQuery = "update degreeRequests set finalStatus = 'approved' where ID = @id";
-                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-                updateCommand.Parameters.AddWithValue("@id", id);
-                updateCommand.ExecuteNonQuery();
-            }
-        }
+        DegreeForm degreeForm = new DegreeForm();
+        degreeForm.SetID(id);
+       
+        DatabaseFactory.getInstance().setFinalStatus(degreeForm);
 
     }
 }

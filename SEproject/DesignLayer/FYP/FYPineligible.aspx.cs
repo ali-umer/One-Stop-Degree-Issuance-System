@@ -74,24 +74,18 @@ public partial class DesignLayer_FYP_FYPineligible : System.Web.UI.Page
         string[] args = btn.CommandArgument.Split('|');
         string id = args[0];
 
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
+        DateTime currentTime = DateTime.Now;
+        DateTime currentDate = DateTime.Today;
+        string formattedTime = currentTime.ToString("HH:mm:ss");
+        string formattedDate = currentDate.ToString("yyyy-MM-dd");
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
 
-            DateTime currentTime = DateTime.Now;
-            DateTime currentDate = DateTime.Today;
-            string formattedTime = currentTime.ToString("HH:mm:ss");
-            string formattedDate = currentDate.ToString("yyyy-MM-dd");
+        DegreeForm form = new DegreeForm();
+        form.SetFYPApproval("not approved");
+        form.SetFYPTime(formattedTime);
+        form.SetFYPDate(formattedDate);
+        form.SetID(id);
 
-            string updateQuery = "Update degreeRequests set FYPapproval = 'not approved', FYPTime = @FYPTime,FYPDate = @FYPDate where ID = @id";
-
-            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-            updateCommand.Parameters.AddWithValue("FYPTime", formattedTime);
-            updateCommand.Parameters.AddWithValue("FYPDate", formattedDate);
-            updateCommand.Parameters.AddWithValue("id", id);
-            updateCommand.ExecuteNonQuery();
-        }
+        DatabaseFactory.getInstance().GenerateIneligibleforFYP(form);
     }
 }

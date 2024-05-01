@@ -66,9 +66,9 @@ public partial class DesignLayer_Finance_financeRequestLog : System.Web.UI.Page
                 Button approveButton = new Button();
                 approveButton.Text = "Approve";
                 approveButton.ID = "approveButton_" + id;
-                approveButton.CommandArgument = id; // Store data in CommandArgument
-                approveButton.Click += new EventHandler(approve); // Assign event handler
-                approveButton.Attributes.Add("runat", "server"); // Add runat="server" attribute
+                approveButton.CommandArgument = id;
+                approveButton.Click += new EventHandler(approve);
+                approveButton.Attributes.Add("runat", "server");
                 TableCell cellButton = new TableCell();
                 cellButton.Controls.Add(approveButton);
                 row.Cells.Add(cellButton);
@@ -87,42 +87,19 @@ public partial class DesignLayer_Finance_financeRequestLog : System.Web.UI.Page
 
         string[] args = btn.CommandArgument.Split('|');
         string id = args[0];
-        string dues = null, fee = null;
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
+        DateTime currentTime = DateTime.Now;
+        DateTime currentDate = DateTime.Today;
+        string formattedTime = currentTime.ToString("HH:mm:ss");
+        string formattedDate = currentDate.ToString("yyyy-MM-dd");
 
-            DateTime currentTime = DateTime.Now;
-            DateTime currentDate = DateTime.Today;
-            string formattedTime = currentTime.ToString("HH:mm:ss");
-            string formattedDate = currentDate.ToString("yyyy-MM-dd");
 
-            string checkQuery = "SELECT OUTSTANDINGDUES, DEGREEFEE FROM DEGREEREQUESTS WHERE ID = @id";
-          
-            SqlCommand checkCommand = new SqlCommand(checkQuery, connection);
-            checkCommand.Parameters.AddWithValue("id", id);
-            SqlDataReader reader = checkCommand.ExecuteReader();
+        DegreeForm degreeForm = new DegreeForm();
+        degreeForm.SetID(id);
+        degreeForm.SetFinanceTime(formattedTime);
+        degreeForm.SetFinanceDate(formattedDate);
 
-            while (reader.Read())
-            {
-                dues = reader["OUTSTANDINGDUES"].ToString();
-                fee = reader["DEGREEFEE"].ToString();
-
-            }
-            reader.Close();
-
-            if (dues == "none" && fee == "paid")
-            {
-                string updateQuery = "Update degreeRequests set Financeapproval = 'approved', financeTime = @FinanceTime,financeDate = @financeDate where ID = @id";
-
-                SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-                updateCommand.Parameters.AddWithValue("FinanceTime", formattedTime);
-                updateCommand.Parameters.AddWithValue("financeDate", formattedDate);
-                updateCommand.Parameters.AddWithValue("id", id);
-                updateCommand.ExecuteNonQuery();
-            }
-        }
+        DatabaseFactory.getInstance().generateEligibleforFinance(degreeForm);
+       
     }
 }

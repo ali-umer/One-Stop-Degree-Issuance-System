@@ -10,37 +10,16 @@ public partial class DesignLayer_Student_studentHome : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
+        Student student = DatabaseFactory.getInstance().getPersonalDetailsofStudent(Session["userName"].ToString());
 
-        string userName = Session["userName"].ToString();
-        string mainQuery = "SELECT NAME,DOB,FATHERNAME,BATCH,CNIC,NATIONALITY,CONTACT,CAMPUS FROM student S JOIN users U ON S.studentID= U.ID WHERE S.studentID = @userName";
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-
-            using (SqlCommand command = new SqlCommand(mainQuery, connection))
-            {
-                command.Parameters.AddWithValue("@userName", userName);
-
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        name.InnerHtml = "<strong>NAME: </strong>" + reader["NAME"].ToString();
-                        DOB.InnerHtml = "<strong>DOB: </strong>" + reader["DOB"].ToString();
-                        fatherName.InnerHtml = "<strong>FATHER NAME: </strong>" + reader["FATHERNAME"].ToString();
-                        batch.InnerHtml = "<strong>BATCH: </strong>" + reader["BATCH"].ToString();
-                        CNIC.InnerHtml = "<strong>CNIC: </strong>" + reader["CNIC"].ToString();
-                        nationality.InnerHtml = "<strong>NATIONALITY: </strong>" + reader["NATIONALITY"].ToString();
-                        contact.InnerHtml = "<strong>CONTACT: </strong>" + reader["CONTACT"].ToString();
-                        campus.InnerHtml = "<strong>CAMPUS: </strong>" + reader["CAMPUS"].ToString();
-
-                    }
-                }
-            }
-        }
+        name.InnerHtml = "<strong>NAME: </strong>" + student.getName();
+        DOB.InnerHtml = "<strong>DOB: </strong>" + student.getDOB();
+        fatherName.InnerHtml = "<strong>FATHER NAME: </strong>" + student.getFatherName();
+        batch.InnerHtml = "<strong>BATCH: </strong>" + student.getBatch();
+        CNIC.InnerHtml = "<strong>CNIC: </strong>" + student.getCNIC();
+        nationality.InnerHtml = "<strong>NATIONALITY: </strong>" + student.getNationality();
+        contact.InnerHtml = "<strong>CONTACT: </strong>" + student.getContact();
+        campus.InnerHtml = "<strong>CAMPUS: </strong>" + student.getCampus();
     }
 
 }

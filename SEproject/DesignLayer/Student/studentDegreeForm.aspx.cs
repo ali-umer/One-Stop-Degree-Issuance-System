@@ -40,19 +40,12 @@ public partial class DesignLayer_Student_studentDegreeForm : System.Web.UI.Page
 
     protected void RequestInitiated(object sender, EventArgs e)
     {
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        string insertQuery = "INSERT INTO degreeRequests(ID,name,batch,FYPapproval,financeApproval,finalStatus,outstandingDues,degreeFee) VALUES (@userName,@name,@batch,'pending','pending','pending','none','paid')";
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
+        DegreeForm form = new DegreeForm();
+        form.SetID(roll.Value);
+        form.SetName(name.Value);
+        form.SetBatch(batch.Value);
 
-            SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
-            insertCommand.Parameters.AddWithValue("@userName", roll.Value);
-            insertCommand.Parameters.AddWithValue("@name", name.Value);
-            insertCommand.Parameters.AddWithValue("@batch", batch.Value);
-            insertCommand.ExecuteNonQuery();
-
-        }
+        DatabaseFactory.getInstance().InitiateDegreeRequest(form);
     }
 }

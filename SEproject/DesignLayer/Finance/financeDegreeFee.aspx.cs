@@ -53,9 +53,10 @@ public partial class DesignLayer_Finance_financeDegreeFee : System.Web.UI.Page
                 Button ineligibleButton = new Button();
                 ineligibleButton.Text = "Ineligible";
                 ineligibleButton.ID = "ineligibleButton_" + id;
-                ineligibleButton.CommandArgument = id; // Store data in CommandArgument
-                ineligibleButton.Click += new EventHandler(approve); // Assign event handler
-                ineligibleButton.Attributes.Add("runat", "server"); // Add runat="server" attribute
+                ineligibleButton.CommandArgument = id; 
+                ineligibleButton.Click += new EventHandler(disapprove);
+                ineligibleButton.Attributes.Add("runat", "server");
+
                 TableCell cellButton = new TableCell();
                 cellButton.Controls.Add(ineligibleButton);
                 row.Cells.Add(cellButton);
@@ -68,25 +69,16 @@ public partial class DesignLayer_Finance_financeDegreeFee : System.Web.UI.Page
         }
     }
 
-    protected void approve(object sender, EventArgs e)
+    protected void disapprove(object sender, EventArgs e)
     {
         Button btn = (Button)sender;
 
         string[] args = btn.CommandArgument.Split('|');
         string id = args[0];
-        string dues = null, fee = null;
-        string connectionString = "Data Source=DESKTOP-LQH1JMA\\SQLEXPRESS;Initial Catalog=OneStop;Integrated Security=True;Encrypt=False;";
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            string updateQuery = "Update degreeRequests set degreeFee = 'not paid' where ID = @id";
-
-            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-            updateCommand.Parameters.AddWithValue("id", id);
-            updateCommand.ExecuteNonQuery();
-
-        }
+        DegreeForm form = new DegreeForm(); 
+        form.SetID(id);
+        
+        DatabaseFactory.getInstance().degreeFeeNotPaid(form);
     }
 }
