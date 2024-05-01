@@ -1,12 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="FYPrequestStats.aspx.cs" Inherits="DesignLayer_FYP_FYPrequestStats" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="directorDepartmentStats.aspx.cs" Inherits="DesignLayer_Director_directorDepartmentStats" %>
 
 <!DOCTYPE html>
 
 <html lang="en">
 <head runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Request Stats</title>
+    <title>Department Stats</title>
     <style>
         body,
         html {
@@ -21,8 +20,6 @@
             display: inline-block;
             margin-right: 50px;
             font-size: 15px;
-            text-align: center;
-            justify-content: center;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
 
@@ -60,7 +57,7 @@
                 text-decoration: none;
                 border-radius: 10px;
                 padding: 5% 0;
-                margin-top: 13%;
+                margin-top: 10%;
                 font-size: x-large;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 position: relative;
@@ -85,12 +82,11 @@
         }
 
         .card {
-            width: 450px;
+            width: 850px;
             height: 250px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
             justify-content: center;
-            text-align: center;
             align-items: center;
             background-color: white;
             display: flex;
@@ -115,7 +111,7 @@
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
-            width: 20%;
+            width: 11%;
         }
 
         th {
@@ -152,24 +148,25 @@
     <div class="left">
         <div class="navbar">
             <img src="../../logo.png">
-            <a href="/DesignLayer/FYP/FYPhome.aspx">Home</a>
-            <a href="/DesignLayer/FYP/FYPrequestLog.aspx">Request Log</a>
-            <a style="color: black;" href="/DesignLayer/FYP/FYPrequestStats.aspx">Request Stats</a>
-            <a href="/DesignLayer/FYP/FYPineligible.aspx">Ineligible Students</a>
-            <a href="/DesignLayer/FYP/FYPcomplaintLog.aspx">Complaint Log</a>
+            <a href="/DesignLayer/Director/directorHome.aspx">Home</a>
+            <a href="/DesignLayer/Director/directorRequestLog.aspx">Request Log</a>
+            <a href="/DesignLayer/Director/directorTrackActivity.aspx">Track Activity</a>
+            <a style="color: black;" href="/DesignLayer/Director/directorDepartmentStats.aspx">View Department Stats</a>
+            <a href="/DesignLayer/Director/directorFeedback.aspx">View Feedbacks</a>
+            <a href="/DesignLayer/Director/directorComplaints.aspx">View Complaints</a>
         </div>
     </div>
 
     <div class="right">
         <div class="card-container">
-
             <div style="height: 10px"></div>
 
             <div class="card">
                 <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                    <h1>&nbsp;&nbsp;REQUEST STATS</h1>
+                    <h1>&nbsp;&nbsp;DEPARTMENTAL STATS</h1>
                 </div>
-                <p id="stat" runat="server"></p>
+                <p runat="server" id="fyp"></p>
+                <p runat="server" id="finance"></p>
 
             </div>
         </div>
@@ -178,7 +175,6 @@
 
 </body>
 </html>
-
 
 
 

@@ -5,7 +5,7 @@
 <html lang="en">
 <head runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Request Log</title>
+    <title>Complaints</title>
     <style>
         body,
         html {
@@ -151,7 +151,7 @@
             <a href="/DesignLayer/Director/directorHome.aspx">Home</a>
             <a href="/DesignLayer/Director/directorRequestLog.aspx">Request Log</a>
             <a href="/DesignLayer/Director/directorTrackActivity.aspx">Track Activity</a>
-            <a href="#">View Department Stats</a>
+            <a href="/DesignLayer/Director/directorDepartmentStats.aspx">View Department Stats</a>
             <a href="/DesignLayer/Director/directorFeedback.aspx">View Feedbacks</a>
             <a style="color: black;" href="/DesignLayer/Director/directorComplaints.aspx">View Complaints</a>
         </div>
@@ -159,7 +159,12 @@
 
     <div class="right">
         <div class="card-container">
+            <div style="height: 10px"></div>
+
             <div class="card">
+                <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    <h1>&nbsp;&nbsp;COMPLAINTS</h1>
+                </div>
                 <div class="table-container">
                     <form runat="server">
 
@@ -168,7 +173,7 @@
                                 <asp:TableHeaderCell>ID</asp:TableHeaderCell>
                                 <asp:TableHeaderCell>Department</asp:TableHeaderCell>
                                 <asp:TableHeaderCell>Complaint</asp:TableHeaderCell>
-                           
+
 
                             </asp:TableHeaderRow>
                         </asp:Table>

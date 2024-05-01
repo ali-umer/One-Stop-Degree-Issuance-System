@@ -83,7 +83,7 @@
 
         .card {
             width: 800px;
-            height: 200px;
+            height: 400px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
             justify-content: center;
@@ -158,7 +158,12 @@
 
     <div class="right">
         <div class="card-container">
+            <div style="height: 10px"></div>
+
             <div class="card">
+                <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    <h1>&nbsp;&nbsp;COMPLAINT LOG</h1>
+                </div>
                 <div class="table-container">
                     <form runat="server">
                         <asp:Table ID="dataTable" runat="server">

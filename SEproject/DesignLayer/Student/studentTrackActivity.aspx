@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="FYPrequestStats.aspx.cs" Inherits="DesignLayer_FYP_FYPrequestStats" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="studentTrackActivity.aspx.cs" Inherits="DesignLayer_Student_studentTrackActivity" %>
 
 <!DOCTYPE html>
 
 <html lang="en">
 <head runat="server">
+    <title>Track Activity</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Request Stats</title>
+
     <style>
         body,
         html {
@@ -17,14 +17,6 @@
             background-position: center;
         }
 
-        .card p {
-            display: inline-block;
-            margin-right: 50px;
-            font-size: 15px;
-            text-align: center;
-            justify-content: center;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        }
 
         .left {
             float: left;
@@ -60,7 +52,7 @@
                 text-decoration: none;
                 border-radius: 10px;
                 padding: 5% 0;
-                margin-top: 13%;
+                margin-top: 7%;
                 font-size: x-large;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 position: relative;
@@ -75,28 +67,78 @@
                     border-radius: 20px;
                 }
 
-
         .card-container {
             display: grid;
             justify-content: center;
             align-items: center;
             height: 100%;
-            padding: 0 10px;
         }
 
         .card {
-            width: 450px;
-            height: 250px;
+            width: 800px;
+            height: 300px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
             justify-content: center;
-            text-align: center;
             align-items: center;
             background-color: white;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            overflow: hidden;
+        }
+
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px #333;
+            }
+
+            100% {
+                box-shadow: 0 0 30px #000;
+            }
+        }
+
+        img {
+            height: 21%;
+            width: 70%;
+        }
+
+        .form-container {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+            padding: 15%;
+            border-radius: 10px;
+        }
+
+
+            .form-container input[type="text"] {
+                width: 92%;
+                padding: 15px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+        .submitButton {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .submitButton:hover {
+                background-color: #000;
+            }
+
+
+        h1 {
+            font-size: 26px;
         }
 
         .table-container {
@@ -115,7 +157,7 @@
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
-            width: 20%;
+            width: 17%;
         }
 
         th {
@@ -130,56 +172,42 @@
         tr:hover {
             background-color: #f2f2f2;
         }
-
-
-        @keyframes glow {
-            0% {
-                box-shadow: 0 0 10px #333;
-            }
-
-            100% {
-                box-shadow: 0 0 30px #000;
-            }
-        }
-
-        img {
-            height: 21%;
-            width: 70%;
-        }
     </style>
 </head>
 <body>
     <div class="left">
         <div class="navbar">
             <img src="../../logo.png">
-            <a href="/DesignLayer/FYP/FYPhome.aspx">Home</a>
-            <a href="/DesignLayer/FYP/FYPrequestLog.aspx">Request Log</a>
-            <a style="color: black;" href="/DesignLayer/FYP/FYPrequestStats.aspx">Request Stats</a>
-            <a href="/DesignLayer/FYP/FYPineligible.aspx">Ineligible Students</a>
-            <a href="/DesignLayer/FYP/FYPcomplaintLog.aspx">Complaint Log</a>
+            <a href="/DesignLayer/Student/studentHome.aspx">Home</a>
+            <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
+            <a href="studentComplaintForm.aspx">Complaint Form</a>
+            <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
+            <a style="color: black;" href="/DesignLayer/Student/studentTrackActivity.aspx">Track Activity</a>
+            <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
+            <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>
     </div>
 
     <div class="right">
         <div class="card-container">
-
-            <div style="height: 10px"></div>
-
             <div class="card">
                 <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                    <h1>&nbsp;&nbsp;REQUEST STATS</h1>
+                    <h1>&nbsp;&nbsp;TRACK ACTIVITY</h1>
                 </div>
-                <p id="stat" runat="server"></p>
-
+                <div class="table-container">
+                    <asp:Table ID="dataTable" runat="server">
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell>Name</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>FYP status</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Finance Status</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Outstanding Dues</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Degree Fee</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Final Status</asp:TableHeaderCell>
+                        </asp:TableHeaderRow>
+                    </asp:Table>
+                </div>
             </div>
         </div>
     </div>
-
-
 </body>
 </html>
-
-
-
-
-

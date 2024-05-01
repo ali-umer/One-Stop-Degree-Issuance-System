@@ -19,6 +19,7 @@
         .card p {
             display: inline-block;
             margin-right: 50px;
+            margin-bottom: 40px;
             font-size: 15px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
@@ -81,9 +82,10 @@
             padding: 0 10px;
         }
 
+
         .card {
             width: 800px;
-            height: 200px;
+            height: 250px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
             justify-content: center;
@@ -93,6 +95,7 @@
             flex-direction: column;
             justify-content: flex-start;
         }
+
 
         @keyframes glow {
             0% {
@@ -108,6 +111,25 @@
             height: 21%;
             width: 70%;
         }
+
+        .logout-btn {
+            position: absolute;
+            top: 30px;
+            right: 80px;
+            color: #fff;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .logout-btn:hover {
+                background-color: #c82333;
+            }
     </style>
 </head>
 <body>
@@ -122,7 +144,11 @@
     </div>
 
     <div class="right">
+        <a class="logout-btn" href="/DesignLayer/Login.aspx">Logout</a>
+
         <div class="card-container">
+            <div style="height: 10px"></div>
+
             <div class="card">
                 <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px; text-align: left">
                     <h1>&nbsp;&nbsp;PERSONAL DETAILS</h1>

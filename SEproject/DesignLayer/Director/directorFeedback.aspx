@@ -5,7 +5,7 @@
 <html lang="en">
 <head runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Request Log</title>
+    <title>Feedbacks</title>
     <style>
         body,
         html {
@@ -83,7 +83,7 @@
 
         .card {
             width: 700px;
-            height: 300px;
+            height: 400px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
             justify-content: center;
@@ -151,7 +151,7 @@
             <a href="/DesignLayer/Director/directorHome.aspx">Home</a>
             <a href="/DesignLayer/Director/directorRequestLog.aspx">Request Log</a>
             <a href="/DesignLayer/Director/directorTrackActivity.aspx">Track Activity</a>
-            <a href="#">View Department Stats</a>
+            <a href="/DesignLayer/Director/directorDepartmentStats.aspx">View Department Stats</a>
             <a style="color: black;" href="/DesignLayer/Director/directorFeedback.aspx">View Feedbacks</a>
             <a href="/DesignLayer/Director/directorComplaints.aspx">View Complaints</a>
         </div>
@@ -159,7 +159,11 @@
 
     <div class="right">
         <div class="card-container">
+            <div style="height:10px"></div>
             <div class="card">
+                <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    <h1>&nbsp;&nbsp;FEEDBACKS</h1>
+                </div>
                 <div class="table-container">
                     <form runat="server">
 
@@ -167,7 +171,7 @@
                             <asp:TableHeaderRow>
                                 <asp:TableHeaderCell>ID</asp:TableHeaderCell>
                                 <asp:TableHeaderCell>Feedback</asp:TableHeaderCell>
-                                
+
                             </asp:TableHeaderRow>
                         </asp:Table>
                     </form>

@@ -19,6 +19,7 @@
         .card p {
             display: inline-block;
             margin-right: 50px;
+            margin-bottom: 40px;
             font-size: 15px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
@@ -35,7 +36,6 @@
             float: right;
             height: 100%;
             width: 85%;
-            text-align: center;
         }
 
         .navbar {
@@ -65,13 +65,30 @@
                 transition: all 0.3s ease-in-out;
             }
 
-
                 .navbar a:hover {
                     transform: translateY(-10px);
                     background-color: rgba(128, 128, 128, 0.5);
                     border-radius: 20px;
                 }
 
+        .logout-btn {
+            position: absolute;
+            top: 30px;
+            right: 80px;
+            color: #fff;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .logout-btn:hover {
+                background-color: #c82333;
+            }
 
         .card-container {
             display: grid;
@@ -83,7 +100,7 @@
 
         .card {
             width: 800px;
-            height: 200px;
+            height: 250px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
             justify-content: center;
@@ -118,18 +135,21 @@
             <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
             <a href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
             <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
-            <a href="#">Track Activity</a>
+            <a href="/DesignLayer/Student/studentTrackActivity.aspx">Track Activity</a>
             <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
             <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>
     </div>
 
     <div class="right">
+        <a class="logout-btn" href="/DesignLayer/Login.aspx">Logout</a>
         <div class="card-container">
+            <div style="height: 10px"></div>
             <div class="card">
                 <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px; text-align: left">
                     <h1>&nbsp;&nbsp;PERSONAL DETAILS</h1>
                 </div>
+
                 <div>
                     <br />
                     <p runat="server" id="name"></p>
@@ -152,3 +172,4 @@
 
 </body>
 </html>
+

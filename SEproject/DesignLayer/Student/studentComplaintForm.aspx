@@ -74,8 +74,8 @@
         }
 
         .card {
-            width: 420px;
-            height: 400px;
+            width: 450px;
+            height: 420px;
             box-shadow: 4px 8px 30px white;
             border-radius: 15px;
             justify-content: center;
@@ -196,7 +196,7 @@
             <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
             <a style="color: black;" href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
             <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
-            <a href="#">Track Activity</a>
+            <a href="/DesignLayer/Student/studentTrackActivity.aspx">Track Activity</a>
             <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
             <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>

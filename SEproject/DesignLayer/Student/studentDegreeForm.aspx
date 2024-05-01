@@ -150,7 +150,7 @@
             <a style="color: black;" href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
             <a href="studentComplaintForm.aspx">Complaint Form</a>
             <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
-            <a href="#">Track Activity</a>
+            <a href="/DesignLayer/Student/studentTrackActivity.aspx">Track Activity</a>
             <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
             <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>
