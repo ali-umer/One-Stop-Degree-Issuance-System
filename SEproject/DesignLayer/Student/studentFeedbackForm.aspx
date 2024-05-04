@@ -138,7 +138,7 @@
             <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
             <a href="/DesignLayer/Student/studentTrackActivity.aspx">Track Activity</a>
             <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
-            <a style="color: black;" href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
+            <a style="color: skyblue;" href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>
     </div>
 
@@ -152,7 +152,7 @@
                     <br />
                     <br />
                     <br />
-                    <input runat="server" type="text" id="feedback" placeholder="Enter your Feedback here" required autocomplete ="off">
+                    <input runat="server" type="text" id="feedback" placeholder="Enter your Feedback here" required autocomplete="off">
                     <asp:Button class="submitButton" runat="server" Text="Submit" OnClick="SubmitClicked" ID="submit"></asp:Button>
 
                 </form>

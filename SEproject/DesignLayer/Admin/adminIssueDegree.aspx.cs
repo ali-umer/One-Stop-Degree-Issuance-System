@@ -85,7 +85,7 @@ public partial class DesignLayer_Admin_adminIssueDegree : System.Web.UI.Page
         string id = args[0];
         DegreeForm degreeForm = new DegreeForm();
         degreeForm.SetID(id);
-       
+
         DatabaseFactory.getInstance().setFinalStatus(degreeForm);
 
     }

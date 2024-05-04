@@ -149,7 +149,7 @@
         <div class="navbar">
             <img src="../../logo.png">
             <a href="/DesignLayer/Finance/financeHome.aspx">Home</a>
-            <a style="color: black;" href="/DesignLayer/Finance/financeOutstandingDues.aspx">Outstanding Dues</a>
+            <a style="color: skyblue;" href="/DesignLayer/Finance/financeOutstandingDues.aspx">Outstanding Dues</a>
             <a href="/DesignLayer/Finance/financeDegreeFee.aspx">Degree Issuance Fee Status</a>
             <a href="/DesignLayer/Finance/financeRequestLog.aspx">Request Log</a>
         </div>

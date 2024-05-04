@@ -20,7 +20,7 @@ public partial class DesignLayer_Student_studentDataChangeForm : System.Web.UI.P
         form.setID(Session["userName"].ToString());
         form.setRequestOption(category.SelectedValue);
         form.setRequestValue(value.Value);
-       
+
         DatabaseFactory.getInstance().insertDataChangeRequest(form);
     }
 }

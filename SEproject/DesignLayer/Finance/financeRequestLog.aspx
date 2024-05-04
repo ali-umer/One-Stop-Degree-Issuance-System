@@ -151,7 +151,7 @@
             <a href="/DesignLayer/Finance/financeHome.aspx">Home</a>
             <a href="/DesignLayer/Finance/financeOutstandingDues.aspx">Outstanding Dues</a>
             <a href="/DesignLayer/Finance/financeDegreeFee.aspx">Degree Issuance Fee Status</a>
-            <a style="color: black;" href="/DesignLayer/Finance/financeRequestLog.aspx">Request Log</a>
+            <a style="color: skyblue;" href="/DesignLayer/Finance/financeRequestLog.aspx">Request Log</a>
         </div>
     </div>
 
@@ -160,9 +160,9 @@
             <div style="height: 10px"></div>
 
             <div class="card">
-                   <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-       <h1>&nbsp;&nbsp;REQUEST LOG</h1>
-   </div>
+                <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    <h1>&nbsp;&nbsp;REQUEST LOG</h1>
+                </div>
                 <div class="table-container">
                     <form runat="server">
 

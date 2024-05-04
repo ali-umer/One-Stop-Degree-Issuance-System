@@ -150,7 +150,7 @@
             <img src="../../logo.png">
             <a href="/DesignLayer/Finance/financeHome.aspx">Home</a>
             <a href="/DesignLayer/Finance/financeOutstandingDues.aspx">Outstanding Dues</a>
-            <a style="color: black;" href="/DesignLayer/Finance/financeDegreeFee.aspx">Degree Issuance Fee Status</a>
+            <a style="color: skyblue;" href="/DesignLayer/Finance/financeDegreeFee.aspx">Degree Issuance Fee Status</a>
             <a href="/DesignLayer/Finance/financeRequestLog.aspx">Request Log</a>
         </div>
     </div>

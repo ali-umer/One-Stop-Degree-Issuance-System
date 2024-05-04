@@ -135,7 +135,7 @@
     <div class="left">
         <div class="navbar">
             <img src="../../logo.png">
-            <a style="color: black;" href="/DesignLayer/FYP/FYPhome.aspx">Home</a>
+            <a style="color: skyblue;" href="/DesignLayer/FYP/FYPhome.aspx">Home</a>
             <a href="/DesignLayer/FYP/FYPrequestLog.aspx">Request Log</a>
             <a href="/DesignLayer/FYP/FYPrequestStats.aspx">Request Stats</a>
             <a href="/DesignLayer/FYP/FYPineligible.aspx">Ineligible Students</a>

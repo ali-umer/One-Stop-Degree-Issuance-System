@@ -136,7 +136,7 @@
     <div class="left">
         <div class="navbar">
             <img src="../../logo.png">
-            <a style="color: black;" href="/DesignLayer/Director/directorHome.aspx">Home</a>
+            <a style="color: skyblue;" href="/DesignLayer/Director/directorHome.aspx">Home</a>
             <a href="/DesignLayer/Director/directorRequestLog.aspx">Request Log</a>
             <a href="/DesignLayer/Director/directorTrackActivity.aspx">Track Activity</a>
             <a href="/DesignLayer/Director/directorDepartmentStats.aspx">View Department Stats</a>

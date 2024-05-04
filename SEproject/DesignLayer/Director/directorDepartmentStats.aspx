@@ -151,7 +151,7 @@
             <a href="/DesignLayer/Director/directorHome.aspx">Home</a>
             <a href="/DesignLayer/Director/directorRequestLog.aspx">Request Log</a>
             <a href="/DesignLayer/Director/directorTrackActivity.aspx">Track Activity</a>
-            <a style="color: black;" href="/DesignLayer/Director/directorDepartmentStats.aspx">View Department Stats</a>
+            <a style="color: skyblue;" href="/DesignLayer/Director/directorDepartmentStats.aspx">View Department Stats</a>
             <a href="/DesignLayer/Director/directorFeedback.aspx">View Feedbacks</a>
             <a href="/DesignLayer/Director/directorComplaints.aspx">View Complaints</a>
         </div>

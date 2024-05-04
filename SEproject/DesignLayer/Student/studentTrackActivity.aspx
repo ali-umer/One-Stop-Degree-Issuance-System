@@ -182,7 +182,7 @@
             <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
             <a href="studentComplaintForm.aspx">Complaint Form</a>
             <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
-            <a style="color: black;" href="/DesignLayer/Student/studentTrackActivity.aspx">Track Activity</a>
+            <a style="color: skyblue;" href="/DesignLayer/Student/studentTrackActivity.aspx">Track Activity</a>
             <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>
             <a href="/DesignLayer/Student/studentFeedbackForm.aspx">Feedback</a>
         </div>
@@ -207,6 +207,9 @@
                     </asp:Table>
                 </div>
             </div>
+            <form runat="server">
+                <asp:Button class="submitButton" ID="generate" runat="server" Text="Generate Degree" OnClick="generate_Click" Visible="false"></asp:Button>
+            </form>
         </div>
     </div>
 </body>

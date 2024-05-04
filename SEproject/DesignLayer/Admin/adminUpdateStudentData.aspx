@@ -151,7 +151,7 @@
             <a href="/DesignLayer/Admin/adminHome.aspx">Home</a>
             <a href="/DesignLayer/Admin/adminRequestLog.aspx">Request Log</a>
             <a href="/DesignLayer/Admin/adminIssueDegree.aspx">Issue Degree</a>
-            <a style="color: black;" href="/DesignLayer/Admin/adminUpdateStudentData.aspx">Update Student Data</a>
+            <a style="color: skyblue;" href="/DesignLayer/Admin/adminUpdateStudentData.aspx">Update Student Data</a>
             <a href="/DesignLayer/Admin/adminComplaintLog.aspx">Complaint Log</a>
         </div>
     </div>

@@ -194,7 +194,7 @@
             <img src="../../logo.png">
             <a href="/DesignLayer/Student/studentHome.aspx">Home</a>
             <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
-            <a style="color: black;" href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
+            <a style="color: skyblue;" href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
             <a href="/DesignLayer/Student/studentComplaints.aspx">My Complaints</a>
             <a href="/DesignLayer/Student/studentTrackActivity.aspx">Track Activity</a>
             <a href="/DesignLayer/Student/studentDataChangeForm.aspx">Data Change Form</a>

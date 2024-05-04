@@ -100,6 +100,6 @@ public partial class DesignLayer_Finance_financeRequestLog : System.Web.UI.Page
         degreeForm.SetFinanceDate(formattedDate);
 
         DatabaseFactory.getInstance().generateEligibleforFinance(degreeForm);
-       
+
     }
 }

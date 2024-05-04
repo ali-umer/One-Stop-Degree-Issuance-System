@@ -152,7 +152,7 @@
             <a href="/DesignLayer/FYP/FYPrequestLog.aspx">Request Log</a>
             <a href="/DesignLayer/FYP/FYPrequestStats.aspx">Request Stats</a>
             <a href="/DesignLayer/FYP/FYPineligible.aspx">Ineligible Students</a>
-            <a style="color: black;" href="/DesignLayer/FYP/FYPcomplaintLog.aspx">Complaint Log</a>
+            <a style="color: skyblue;" href="/DesignLayer/FYP/FYPcomplaintLog.aspx">Complaint Log</a>
         </div>
     </div>
 
@@ -161,9 +161,9 @@
             <div style="height: 10px"></div>
 
             <div class="card">
-                   <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-       <h1>&nbsp;&nbsp;COMPLAINT LOG</h1>
-   </div>
+                <div style="background-color: #333; color: white; width: 100%; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    <h1>&nbsp;&nbsp;COMPLAINT LOG</h1>
+                </div>
                 <div class="table-container">
                     <form runat="server">
                         <asp:Table ID="dataTable" runat="server">

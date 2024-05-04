@@ -12,7 +12,7 @@ public partial class DesignLayer_Admin_adminHome : System.Web.UI.Page
     {
         OneStopAdmin admin = DatabaseFactory.getInstance().getPersonalDetailsofAdmin(Session["userName"].ToString());
 
-        name.InnerHtml = "<strong>NAME: </strong>" +admin.getName();
+        name.InnerHtml = "<strong>NAME: </strong>" + admin.getName();
         DOB.InnerHtml = "<strong>DOB: </strong>" + admin.getDOB();
         bloodGroup.InnerHtml = "<strong>BLOOD GROUP: </strong>" + admin.getBloodGroup();
         gender.InnerHtml = "<strong>GENDER: </strong>" + admin.getGender();
