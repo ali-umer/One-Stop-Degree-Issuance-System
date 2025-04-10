@@ -147,7 +147,7 @@
 <body>
     <div class="left">
         <div class="navbar">
-            <img src="../../logo.png">
+            <img src="../../assets/logo.png">
             <a href="/DesignLayer/Finance/financeHome.aspx">Home</a>
             <a href="/DesignLayer/Finance/financeOutstandingDues.aspx">Outstanding Dues</a>
             <a style="color: skyblue;" href="/DesignLayer/Finance/financeDegreeFee.aspx">Degree Issuance Fee Status</a>

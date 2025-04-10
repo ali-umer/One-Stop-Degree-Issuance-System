@@ -116,7 +116,7 @@
             <div style="height:50px">
 
             </div>
-            <img src="../One Stop Degree Issuance System.png" />
+            <img src="../assets/One Stop Degree Issuance System.png" />
         </div>
 
         <div class="right">

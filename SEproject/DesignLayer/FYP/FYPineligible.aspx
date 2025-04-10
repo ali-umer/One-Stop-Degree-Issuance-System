@@ -147,7 +147,7 @@
 <body>
     <div class="left">
         <div class="navbar">
-            <img src="../../logo.png">
+            <img src="../../assets/logo.png">
             <a href="/DesignLayer/FYP/FYPhome.aspx">Home</a>
             <a href="/DesignLayer/FYP/FYPrequestLog.aspx">Request Log</a>
             <a href="/DesignLayer/FYP/FYPrequestStats.aspx">Request Stats</a>

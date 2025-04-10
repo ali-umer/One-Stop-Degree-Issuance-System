@@ -191,7 +191,7 @@
 <body>
     <div class="left">
         <div class="navbar">
-            <img src="../../logo.png">
+            <img src="../../assets/logo.png">
             <a href="/DesignLayer/Student/studentHome.aspx">Home</a>
             <a href="/DesignLayer/Student/studentDegreeForm.aspx">Degree Form</a>
             <a style="color: skyblue;" href="/DesignLayer/Student/studentComplaintForm.aspx">Complaint Form</a>
